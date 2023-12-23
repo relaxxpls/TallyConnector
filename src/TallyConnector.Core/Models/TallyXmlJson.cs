@@ -11,13 +11,11 @@ public class TallyBaseObject
     [JsonIgnore]
     [XmlAnyAttribute]
     public XmlAttribute[]? OtherAttributes { get; set; }
+
     /// <summary>
     /// Removes Null Childs that are created during xml deserilisation
     /// </summary>
-    public virtual void RemoveNullChilds()
-    {
-
-    }
+    public virtual void RemoveNullChilds() { }
 }
 
 public class TallyXmlJson : TallyBaseObject
@@ -32,43 +30,47 @@ public class TallyXmlJson : TallyBaseObject
 
     public string GetJson(bool Indented = false)
     {
-        string Json = JsonSerializer.Serialize(this, GetType(), new JsonSerializerOptions()
-        {
-            WriteIndented = Indented,
-            //DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-            Converters = { new JsonStringEnumConverter(), new TallyDateJsonConverter() }
-        });
+        string Json = JsonSerializer.Serialize(
+            this,
+            GetType(),
+            new JsonSerializerOptions()
+            {
+                WriteIndented = Indented,
+                //DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+                Converters = { new JsonStringEnumConverter(), new TallyDateJsonConverter() }
+            }
+        );
         return Json;
     }
 
     public string GetXML(XmlAttributeOverrides? attrOverrides = null, bool indent = false)
     {
         TextWriter textWriter = new StringWriter();
-        XmlWriterSettings settings = new()
-        {
-            OmitXmlDeclaration = true,
-            //NewLineChars = "&#13;&#10;", //If /r/n in Xml replace
-            NewLineHandling = NewLineHandling.Entitize,
-            Encoding = Encoding.Unicode,
-            CheckCharacters = false,
-            Indent = indent,
-        };
-        XmlSerializerNamespaces ns = new(
-                     new[] { XmlQualifiedName.Empty });
+        XmlWriterSettings settings =
+            new()
+            {
+                OmitXmlDeclaration = true,
+                //NewLineChars = "&#13;&#10;", //If /r/n in Xml replace
+                NewLineHandling = NewLineHandling.Entitize,
+                Encoding = Encoding.Unicode,
+                CheckCharacters = false,
+                Indent = indent,
+            };
+        XmlSerializerNamespaces ns = new(new[] { XmlQualifiedName.Empty });
 
-        XmlSerializer xmlSerializer = attrOverrides == null ? new(this.GetType()) : new(this.GetType(), attrOverrides);
+        XmlSerializer xmlSerializer =
+            attrOverrides == null ? new(this.GetType()) : new(this.GetType(), attrOverrides);
         var writer = XmlWriter.Create(textWriter, settings);
         xmlSerializer.Serialize(writer, this, ns);
         return textWriter.ToString()!;
     }
-
 }
 
 [XmlRoot(ElementName = "OBJECTS")]
 public class BasicTallyObject : TallyXmlJson, ITallyObject, IBasicTallyObject
 {
     [XmlElement(ElementName = "MASTERID")]
-    public int? MasterId { get; set; }
+    public ulong? MasterId { get; set; }
 
     [XmlElement(ElementName = "GUID")]
     [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
@@ -79,13 +81,9 @@ public class BasicTallyObject : TallyXmlJson, ITallyObject, IBasicTallyObject
     public string? RemoteId { get; set; }
 
     [XmlElement(ElementName = "ALTERID")]
-    public int? AlterId { get; set; }
+    public ulong? AlterId { get; set; }
 
-    public void PrepareForExport()
-    {
-    }
-
-
+    public void PrepareForExport() { }
 
     public override string ToString()
     {
