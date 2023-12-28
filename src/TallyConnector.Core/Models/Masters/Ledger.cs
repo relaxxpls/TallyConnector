@@ -49,6 +49,42 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
         set => name = value;
     }
 
+    [XmlElement(ElementName = "RESERVEDNAME")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string ReservedName { get; set; }
+
+    [XmlElement(ElementName = "PRIORSTATENAME")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string PriorStateName { get; set; }
+
+    [XmlElement(ElementName = "VATDEALERTYPE")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string VatDealerType { get; set; }
+
+    [XmlElement(ElementName = "TAXCLASSIFICATIONNAME")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string TaxClassificationName { get; set; }
+
+    [XmlElement(ElementName = "SERVICECATEGORY")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string ServiceCategory { get; set; }
+
+    [XmlElement(ElementName = "LEDGERFBTCATEGORY")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string FbtCategory { get; set; }
+
+    [XmlElement(ElementName = "LEDGERCOUNTRYISDCODE")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string CountryISDCode { get; set; }
+
+    [XmlElement(ElementName = "APPROPRIATEFOR")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string AppropriateFor { get; set; }
+
+    //[XmlElement(ElementName = "GSTNATUREOFSUPPLY")]
+    //[Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    //public string GstNatureOfSupply { get; set; }
+
     [XmlElement(ElementName = "PARENT")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     [Required]
@@ -216,6 +252,58 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
     [Column(TypeName = "nvarchar(20)")]
     public GSTPartyType? GSTPartyType { get; set; }
 
+    [XmlElement(ElementName = "ALLOWINMOBILE")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? AllowInMobile { get; set; }
+
+    [XmlElement(ElementName = "ISCOSTTRACKINGON")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsCostTrackingOn { get; set; }
+
+    [XmlElement(ElementName = "ISBENEFICIARYCODEON")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsBeneficiaryCodeOn { get; set; }
+
+    [XmlElement(ElementName = "ISEXPORTONVCHCREATE")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsExportOnVchCreate { get; set; }
+
+    [XmlElement(ElementName = "PLASINCOMEEXPENSE")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? PlaceInIncomeExpense { get; set; }
+
+    [XmlElement(ElementName = "ISUPDATINGTARGETID")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsUpdatingTargetId { get; set; }
+
+    [XmlElement(ElementName = "ISDELETED")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsDeleted { get; set; }
+
+    [XmlElement(ElementName = "ISSECURITYONWHENENTERED")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsSecurityOnWhenEntered { get; set; }
+
+    [XmlElement(ElementName = "ASORIGINAL")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? AsOriginal { get; set; }
+
+    [XmlElement(ElementName = "ISCONDENSED")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsCondensed { get; set; }
+
+    [XmlElement(ElementName = "ISRATEINCLUSIVEVAT")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsRateInclusiveVAT { get; set; }
+
+    [XmlElement(ElementName = "ISTDSAPPLICABLE")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsTDSApplicable { get; set; }
+
+    [XmlElement(ElementName = "SORTPOSITION")]
+    [Column(TypeName = "int")]
+    public int? SortPosition { get; set; }
+
     [XmlElement(ElementName = "ISTRANSPORTER")]
     [Column(TypeName = "nvarchar(3)")]
     public TallyYesNo? IsTransporter { get; set; }
@@ -268,10 +356,6 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
     [Column(TypeName = "nvarchar(3)")]
     public TallyYesNo? IsTCSApplicable { get; set; }
 
-    [XmlElement(ElementName = "ISTDSAPPLICABLE")]
-    [Column(TypeName = "nvarchar(3)")]
-    public TallyYesNo? IsSTDSApplicable { get; set; }
-
     [XmlElement(ElementName = "ISFBTAPPLICABLE")]
     [Column(TypeName = "nvarchar(3)")]
     public TallyYesNo? IsFBTApplicable { get; set; }
@@ -282,7 +366,7 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
 
     [XmlElement(ElementName = "ISTDSEXPENSE")]
     [Column(TypeName = "nvarchar(3)")]
-    public TallyYesNo? IsSTDSExpense { get; set; }
+    public TallyYesNo? IsTDSExpense { get; set; }
 
     [XmlElement(ElementName = "ISEDLIAPPLICABLE")]
     [Column(TypeName = "nvarchar(3)")]

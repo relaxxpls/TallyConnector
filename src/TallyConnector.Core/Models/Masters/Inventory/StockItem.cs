@@ -10,7 +10,7 @@ public class StockItem : BasicTallyObject, IAliasTallyObject
         LanguageNameList = new();
     }
 
-    [XmlAttribute(AttributeName = "NAME")]
+    [XmlAttribute(AttributeName = "OLDNAME")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     [JsonIgnore]
     public string? OldName { get; set; }
@@ -125,8 +125,6 @@ public class StockItem : BasicTallyObject, IAliasTallyObject
     [XmlElement(ElementName = "OPENINGRATE")]
     public TallyRate? OpeningRate { get; set; }
 
-
-
     [XmlIgnore]
     public string? Alias { get; set; }
 
@@ -157,13 +155,13 @@ public class StockItem : BasicTallyObject, IAliasTallyObject
         {
             LanguageNameList.Add(new LanguageNameList());
             LanguageNameList[0].NameList?.NAMES?.Add(Name);
-
         }
         if (Alias != null && Alias != string.Empty)
         {
             LanguageNameList[0].LanguageAlias = Alias;
         }
     }
+
     public new string GetXML(XmlAttributeOverrides? attrOverrides = null, bool indent = false)
     {
         CreateNamesList();
@@ -184,6 +182,7 @@ public class StockItem : BasicTallyObject, IAliasTallyObject
         return $"StockItem - {Name}";
     }
 }
+
 [XmlRoot(ElementName = "HSNDETAILS.LIST")]
 public class HSNDetail : TallyBaseObject, ICheckNull
 {
@@ -198,6 +197,7 @@ public class HSNDetail : TallyBaseObject, ICheckNull
 
     [XmlElement(ElementName = "SRCOFHSNDETAILS")]
     public string SourceOfHSNDetails { get; set; }
+
     public bool IsNull()
     {
         return false;

@@ -11,8 +11,6 @@ public class BaseGroup : BasicTallyObject, IAliasTallyObject
         LanguageNameList = new();
     }
 
-
-
     /// <summary>
     /// Create New Group Under Primary
     /// </summary>
@@ -35,9 +33,8 @@ public class BaseGroup : BasicTallyObject, IAliasTallyObject
         Parent = parent;
     }
 
-
     //Use Old Name Only When you are altering Existing Group
-    [XmlAttribute(AttributeName = "NAME")]
+    [XmlAttribute(AttributeName = "OLDNAME")]
     [JsonIgnore]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? OldName { get; set; }
@@ -55,11 +52,9 @@ public class BaseGroup : BasicTallyObject, IAliasTallyObject
         set => name = value;
     }
 
-
     [XmlIgnore]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? Alias { get; set; }
-
 
     [XmlElement(ElementName = "PARENT")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
@@ -70,22 +65,26 @@ public class BaseGroup : BasicTallyObject, IAliasTallyObject
     [TDLXMLSet(Set = "$GUID:Group:$Parent")]
     public string? ParentId { get; set; }
 
-
     [XmlElement(ElementName = "PRIMARYGROUP")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? PrimaryGroup { get; set; }
-
 
     [XmlElement(ElementName = "RESERVENAME")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? ReserveName { get; set; }
 
+    [XmlElement(ElementName = "GRPDEBITPARENT")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string? GrpDebitParent { get; set; }
+
+    [XmlElement(ElementName = "GRPCREDITPARENT")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string? GrpCreditParent { get; set; }
+
     [JsonIgnore]
     [XmlElement(ElementName = "LANGUAGENAME.LIST")]
     [TDLCollection(CollectionName = "LanguageName")]
     public List<LanguageNameList> LanguageNameList { get; set; }
-
-
 
     public void CreateNamesList()
     {
@@ -93,7 +92,6 @@ public class BaseGroup : BasicTallyObject, IAliasTallyObject
         {
             LanguageNameList.Add(new LanguageNameList());
             LanguageNameList[0].NameList?.NAMES?.Add(Name);
-
         }
         if (Alias != null && Alias != string.Empty)
         {
@@ -121,27 +119,23 @@ public class BaseGroup : BasicTallyObject, IAliasTallyObject
         CreateNamesList();
     }
 
-
     public override string ToString()
     {
         return $"Group - {Name}";
     }
-
 }
+
 [XmlRoot("GROUP")]
 public partial class Group : BaseGroup
 {
-    public Group() : base()
-    {
+    public Group()
+        : base() { }
 
-    }
+    public Group(string name)
+        : base(name) { }
 
-    public Group(string name) : base(name)
-    {
-    }
-    public Group(string name, string parent) : base(name, parent)
-    {
-    }
+    public Group(string name, string parent)
+        : base(name, parent) { }
 
     /// <summary>
     /// Tally Field - Used for Calculation
@@ -151,11 +145,19 @@ public partial class Group : BaseGroup
     public TallyYesNo? IsCalculable { get; set; }
 
     /// <summary>
-    /// Tally Field - Net Debit/Credit Balances for Reporting 
+    /// Tally Field - Net Debit/Credit Balances for Reporting
     /// </summary>
     [XmlElement(ElementName = "ISADDABLE")]
     [Column(TypeName = "nvarchar(3)")]
     public TallyYesNo? IsAddable { get; set; }
+
+    [XmlElement(ElementName = "ISBILLWISEON")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsBillWiseOn { get; set; }
+
+    [XmlElement(ElementName = "ISCOSTCENTERSON")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsCostCentresOn { get; set; }
 
     /// <summary>
     /// Tally Field - Method to Allocate when used in purchase invoice
@@ -180,11 +182,27 @@ public partial class Group : BaseGroup
     [Column(TypeName = "nvarchar(3)")]
     public TallyYesNo? AffectGrossProfit { get; set; }
 
-
     [XmlElement(ElementName = "CANDELETE")]
     [Column(TypeName = "nvarchar(3)")]
     public TallyYesNo? CanDelete { get; set; }
 
+    [XmlElement(ElementName = "ISUPDATINGTARGETID")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsUpdatingTargetId { get; set; }
 
+    [XmlElement(ElementName = "ISDELETED")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsDeleted { get; set; }
 
+    [XmlElement(ElementName = "ISSECURITYONWHENENTERED")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsSecurityOnWhenEntered { get; set; }
+
+    [XmlElement(ElementName = "ASORIGINAL")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? AsOriginal { get; set; }
+
+    [XmlElement(ElementName = "SORTPOSITION")]
+    [Column(TypeName = "nvarchar(3)")]
+    public int? SortPosition { get; set; }
 }

@@ -1,6 +1,5 @@
 ﻿namespace TallyConnector.Core.Models.Masters.CostCenter;
 
-
 [XmlRoot(ElementName = "COSTCENTRE")]
 [XmlType(AnonymousType = true)]
 [TallyObjectType(TallyObjectType.CostCentres)]
@@ -13,7 +12,7 @@ public class CostCentre : BasicTallyObject, IAliasTallyObject
         Category = string.Empty;
     }
 
-    [XmlAttribute(AttributeName = "NAME")]
+    [XmlAttribute(AttributeName = "OLDNAME")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     [JsonIgnore]
     public string? OldName { get; set; }
@@ -58,7 +57,6 @@ public class CostCentre : BasicTallyObject, IAliasTallyObject
     [Column(TypeName = "nvarchar(3)")]
     public TallyYesNo? ShowOpeningBal { get; set; }
 
-
     [XmlIgnore]
     public string? Alias { get; set; }
 
@@ -67,20 +65,19 @@ public class CostCentre : BasicTallyObject, IAliasTallyObject
     [TDLCollection(CollectionName = "LanguageName")]
     public List<LanguageNameList> LanguageNameList { get; set; }
 
-
     public void CreateNamesList()
     {
         if (LanguageNameList.Count == 0)
         {
             LanguageNameList.Add(new LanguageNameList());
             LanguageNameList[0].NameList?.NAMES?.Add(Name);
-
         }
         if (Alias != null && Alias != string.Empty)
         {
             LanguageNameList![0].LanguageAlias = Alias;
         }
     }
+
     public new string GetXML(XmlAttributeOverrides? attrOverrides = null, bool indent = false)
     {
         if (Parent != null && Parent.Contains("Primary"))

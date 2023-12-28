@@ -11,7 +11,7 @@ public class StockGroup : BasicTallyObject, IAliasTallyObject
         LanguageNameList = new();
     }
 
-    [XmlAttribute(AttributeName = "NAME")]
+    [XmlAttribute(AttributeName = "OLDNAME")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     [JsonIgnore]
     public string? OldName { get; set; }
@@ -40,7 +40,7 @@ public class StockGroup : BasicTallyObject, IAliasTallyObject
     public string? ParentId { get; set; }
 
     [XmlElement(ElementName = "ISADDABLE")]
-    public TallyYesNo? IsAddable { get; set; }  //Should Quantities of Items be Added
+    public TallyYesNo? IsAddable { get; set; } //Should Quantities of Items be Added
 
     [XmlElement(ElementName = "GSTAPPLICABLE")]
     public string? GSTApplicability { get; set; }
@@ -58,23 +58,24 @@ public class StockGroup : BasicTallyObject, IAliasTallyObject
 
     [XmlElement(ElementName = "GSTDETAILS.LIST")]
     public List<GSTDetail>? GSTDetails { get; set; }
+
     public void CreateNamesList()
     {
         if (LanguageNameList.Count == 0)
         {
             LanguageNameList.Add(new LanguageNameList());
             LanguageNameList[0].NameList?.NAMES?.Add(Name);
-
         }
         if (Alias != null && Alias != string.Empty)
         {
             LanguageNameList[0].LanguageAlias = Alias;
         }
     }
+
     public new string GetXML(XmlAttributeOverrides? attrOverrides = null, bool indent = false)
     {
         CreateNamesList();
-        return base.GetXML(attrOverrides,indent);
+        return base.GetXML(attrOverrides, indent);
     }
 
     public new void PrepareForExport()
@@ -95,6 +96,7 @@ public class StockGroup : BasicTallyObject, IAliasTallyObject
             GSTDetails = null;
         }
     }
+
     public override string ToString()
     {
         return $"Stock Group - {Name}";
