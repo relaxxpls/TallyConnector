@@ -26,6 +26,7 @@ public class Currency : BasicTallyObject, INamedTallyObject
     [JsonIgnore]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? OldName { get; set; }
+
     [XmlElement(ElementName = "ORIGINALNAME")]
     [Required]
     [Column(TypeName = "nvarchar(5)")]
@@ -35,7 +36,6 @@ public class Currency : BasicTallyObject, INamedTallyObject
     [Required]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string FormalName { get; set; }
-
 
     [XmlElement(ElementName = "DECIMALSYMBOL")]
     [Column(TypeName = "nvarchar(10)")]
@@ -60,11 +60,13 @@ public class Currency : BasicTallyObject, INamedTallyObject
     [Column(TypeName = "nvarchar(3)")]
     public TallyYesNo? IsSuffix { get; set; }
 
+    [XmlElement(ElementName = "ASORIGINAL")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? AsOriginal { get; set; }
+
     [XmlElement(ElementName = "HASSPACE")]
     [Column(TypeName = "nvarchar(3)")]
     public TallyYesNo? HasSpace { get; set; }
-
-
 
     //[XmlElement(ElementName = "DAILYSTDRATES.LIST")]
     //public List<DailystdRate> DailystdRateList { get; set; }
@@ -75,10 +77,7 @@ public class Currency : BasicTallyObject, INamedTallyObject
     //[XmlElement(ElementName = "DAILYSELLINGRATES.LIST")]
     //public List<DailySellingRate> DailySellingRateList { get; set; }
 
-    public new void PrepareForExport()
-    {
-
-    }
+    public new void PrepareForExport() { }
 
     public override string ToString()
     {
@@ -104,4 +103,3 @@ public class Currency : BasicTallyObject, INamedTallyObject
 //public class DailyBuyingRate : DailystdRate
 //{
 //}
-
