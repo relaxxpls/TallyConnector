@@ -25,12 +25,12 @@ public class Currency : BasicTallyObject, INamedTallyObject
     [XmlAttribute(AttributeName = "NAME")]
     [JsonIgnore]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
-    public string? OldName { get; set; }
+    public string? Name { get; set; }
 
     [XmlElement(ElementName = "ORIGINALNAME")]
     [Required]
     [Column(TypeName = "nvarchar(5)")]
-    public string Name { get; set; }
+    public string OriginalName { get; set; }
 
     [XmlElement(ElementName = "MAILINGNAME")]
     [Required]
@@ -40,6 +40,10 @@ public class Currency : BasicTallyObject, INamedTallyObject
     [XmlElement(ElementName = "DECIMALSYMBOL")]
     [Column(TypeName = "nvarchar(10)")]
     public string? DecimalSymbol { get; set; }
+
+    [XmlElement(ElementName = "EXPANDEDSYMBOL")]
+    [Column(TypeName = "nvarchar(10)")]
+    public string? ExpandedSymbol { get; set; }
 
     [XmlElement(ElementName = "DECIMALPLACES")]
     [Range(0, 4)]
@@ -59,6 +63,18 @@ public class Currency : BasicTallyObject, INamedTallyObject
     [XmlElement(ElementName = "ISSUFFIX")]
     [Column(TypeName = "nvarchar(3)")]
     public TallyYesNo? IsSuffix { get; set; }
+
+    [XmlElement(ElementName = "ISDELETED")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsDeleted { get; set; }
+
+    [XmlElement(ElementName = "ISSECURITYONWHENENTERED")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsSecurityOnWhenEntered { get; set; }
+
+    [XmlElement(ElementName = "ISUPDATINGTARGETID")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? IsUpdatingTargetId { get; set; }
 
     [XmlElement(ElementName = "ASORIGINAL")]
     [Column(TypeName = "nvarchar(3)")]
