@@ -5,15 +5,16 @@ using System.Xml.Schema;
 
 namespace TallyConnector.Core.Converters.XMLConverterHelpers;
 [DebuggerDisplay("{ToString()}")]
-[JsonConverter(typeof(TallyAmountJsonConverter))]
+//[JsonConverter(typeof(TallyAmountJsonConverter))]
+[Serializable]
 public class TallyAmount : IXmlSerializable
 {
 
 
-    public TallyAmount(decimal amount, bool? isDebit = null)
+    public TallyAmount ( decimal amount, bool? isDebit = null )
     {
         Amount = amount;
-        if (isDebit is null)
+        if ( isDebit is null )
         {
             isDebit = Amount < 0;
         }
@@ -21,22 +22,22 @@ public class TallyAmount : IXmlSerializable
         {
             PreserveAmount = true;
         }
-        IsDebit = (bool)isDebit;
-        if (!PreserveAmount)
+        IsDebit = ( bool ) isDebit;
+        if ( !PreserveAmount )
         {
             Amount = Amount < 0 ? Amount * -1 : Amount;
         }
     }
 
-    public TallyAmount(decimal? forexAmount,
+    public TallyAmount ( decimal? forexAmount,
                        decimal? rateOfExchage,
-                       string currency,decimal amount = 0, bool? isDebit = null )
+                       string currency, decimal amount = 0, bool? isDebit = null )
     {
         ForexAmount = forexAmount;
         RateOfExchange = rateOfExchage;
         Currency = currency;
         Amount = amount;
-        if (isDebit is null)
+        if ( isDebit is null )
         {
             isDebit = ForexAmount < 0;
         }
@@ -44,67 +45,85 @@ public class TallyAmount : IXmlSerializable
         {
             PreserveAmount = true;
         }
-        IsDebit = (bool)isDebit;
+        IsDebit = ( bool ) isDebit;
         ForexAmount = ForexAmount < 0 ? ForexAmount * -1 : ForexAmount;
-        if (!PreserveAmount)
+        if ( !PreserveAmount )
         {
             Amount = Amount < 0 ? Amount * -1 : Amount;
         }
     }
 
-    public TallyAmount()
+    public TallyAmount ()
     {
     }
 
     [Column(TypeName = "decimal(20,6)")]
-    public decimal Amount { get; private set; }
+    public decimal Amount
+    {
+        get; set;
+    }
 
     // public float? BaseAmount { get; set; }
     [Column(TypeName = "decimal(20,6)")]
-    public decimal? ForexAmount { get; private set; }
+    public decimal? ForexAmount
+    {
+        get; set;
+    }
 
     [Column(TypeName = "decimal(20,6)")]
-    public decimal? RateOfExchange { get; private set; }
+    public decimal? RateOfExchange
+    {
+        get; set;
+    }
 
-    public string? Currency { get; private set; }
+    public string? Currency
+    {
+        get; set;
+    }
 
-    public bool IsDebit { get; private set; }
+    public bool IsDebit
+    {
+        get; set;
+    }
 
-    public bool PreserveAmount { get; private set; }
+    public bool PreserveAmount
+    {
+        get; private set;
+    }
 
-    public XmlSchema? GetSchema()
+    public XmlSchema? GetSchema ()
     {
         return null;
     }
 
-    public void ReadXml(XmlReader reader)
+    public void ReadXml ( XmlReader reader )
     {
         bool isEmptyElement = reader.IsEmptyElement;
-        if (!isEmptyElement)
+        if ( !isEmptyElement )
         {
             string content = reader.ReadElementContentAsString();
 
-            if (content != null && content != string.Empty)
+            if ( content != null && content != string.Empty )
             {
-                if (content[0] == '-')
+                if ( content[0] == '-' )
                 {
                     IsDebit = true;
                 }
                 var matches = Regex.Matches(content, @"[0-9.]+");
-                if (matches.Count == 3)
+                if ( matches.Count == 3 )
                 {
                     ForexAmount = decimal.Parse(matches[0].Value, CultureInfo.InvariantCulture);
                     RateOfExchange = decimal.Parse(matches[1].Value, CultureInfo.InvariantCulture);
                     Amount = decimal.Parse(matches[2].Value, CultureInfo.InvariantCulture);
                     Currency = IsDebit ? content[1].ToString() : content[0].ToString();
                 }
-                else if (matches.Count == 1)
+                else if ( matches.Count == 1 )
                 {
                     Amount = decimal.Parse(matches[0].Value, CultureInfo.InvariantCulture);
                 }
                 else
                 {
-                    if (content.Contains('=') && matches.Count == 2)
+                    if ( content.Contains('=') && matches.Count == 2 )
 
                     {
                         Amount = decimal.Parse(matches[1].Value, CultureInfo.InvariantCulture);
@@ -116,39 +135,39 @@ public class TallyAmount : IXmlSerializable
         }
     }
 
-    public void WriteXml(XmlWriter writer)
+    public void WriteXml ( XmlWriter writer )
     {
         writer.WriteString(this.ToString());
     }
 
-    public override string ToString()
+    public override string ToString ()
     {
-        if (ForexAmount != null
+        if ( ForexAmount != null
             && ForexAmount != 0
             && RateOfExchange != null
             && RateOfExchange != 0
             && Currency != null
-            && Currency != String.Empty)
+            && Currency != String.Empty )
         {
-            if (!PreserveAmount && IsDebit || ForexAmount < 0)
+            if ( !PreserveAmount && IsDebit || ForexAmount < 0 )
             {
                 return $"-{Currency} {ForexAmount?.ToString(CultureInfo.InvariantCulture)!.Replace("-", "")} @ {RateOfExchange?.ToString(CultureInfo.InvariantCulture)!.Replace("-", "")}";
             }
             return $"{Currency} {ForexAmount?.ToString(CultureInfo.InvariantCulture)} @ {RateOfExchange?.ToString(CultureInfo.InvariantCulture)}";
         }
 
-        if (!PreserveAmount && IsDebit)
+        if ( !PreserveAmount && IsDebit )
         {
 
-            return (Amount * -1).ToString(CultureInfo.InvariantCulture);
+            return ( Amount * -1 ).ToString(CultureInfo.InvariantCulture);
         }
         return Amount.ToString(CultureInfo.InvariantCulture);
     }
 
 
-    public static implicit operator decimal(TallyAmount amount)
+    public static implicit operator decimal ( TallyAmount amount )
     {
-        if (amount.IsDebit)
+        if ( amount.IsDebit )
         {
             return amount.Amount * -1;
         }
@@ -159,7 +178,7 @@ public class TallyAmount : IXmlSerializable
         }
     }
 
-    public static implicit operator TallyAmount(decimal amount)
+    public static implicit operator TallyAmount ( decimal amount )
     {
         return new TallyAmount(amount);
     }

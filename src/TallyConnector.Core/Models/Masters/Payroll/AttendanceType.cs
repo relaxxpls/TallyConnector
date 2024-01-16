@@ -13,7 +13,7 @@ public class AttendanceType : BasicTallyObject, IAliasTallyObject
     }
 
     [XmlAttribute(AttributeName = "NAME")]
-    [JsonIgnore]
+     
     public string? OldName { get; set; }
 
 
@@ -55,7 +55,7 @@ public class AttendanceType : BasicTallyObject, IAliasTallyObject
     public string? CanDelete { get; set; } //Ignore This While Creating or Altering
 
 
-    [JsonIgnore]
+     
     [XmlElement(ElementName = "LANGUAGENAME.LIST")]
     [TDLCollection(CollectionName = "LanguageName")]
     public List<LanguageNameList> LanguageNameList { get; set; }

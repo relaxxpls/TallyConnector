@@ -9,7 +9,7 @@ public class LanguageNameList
         NameList = new();
 
     }
-    [JsonIgnore]
+     
     [XmlIgnore]
     public string? LanguageAlias
     {

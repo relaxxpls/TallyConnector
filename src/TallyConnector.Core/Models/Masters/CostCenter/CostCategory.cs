@@ -18,7 +18,7 @@ public class CostCategory : BasicTallyObject, IAliasTallyObject
 
     [XmlAttribute(AttributeName = "NAME")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
-    [JsonIgnore]
+     
     public string? OldName { get; set; }
 
     private string? name;
@@ -47,7 +47,7 @@ public class CostCategory : BasicTallyObject, IAliasTallyObject
     [XmlIgnore]
     public string? Alias { get; set; }
 
-    [JsonIgnore]
+     
     [XmlElement(ElementName = "LANGUAGENAME.LIST")]
     [TDLCollection(CollectionName = "LanguageName")]
     public List<LanguageNameList> LanguageNameList { get; set; }

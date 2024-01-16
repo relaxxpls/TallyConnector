@@ -35,7 +35,7 @@ public class BaseGroup : BasicTallyObject, IAliasTallyObject
 
     //Use Old Name Only When you are altering Existing Group
     [XmlAttribute(AttributeName = "OLDNAME")]
-    [JsonIgnore]
+     
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? OldName { get; set; }
 
@@ -81,7 +81,7 @@ public class BaseGroup : BasicTallyObject, IAliasTallyObject
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? GrpCreditParent { get; set; }
 
-    [JsonIgnore]
+     
     [XmlElement(ElementName = "LANGUAGENAME.LIST")]
     [TDLCollection(CollectionName = "LanguageName")]
     public List<LanguageNameList> LanguageNameList { get; set; }

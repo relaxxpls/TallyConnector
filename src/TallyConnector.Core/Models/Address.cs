@@ -13,7 +13,7 @@ public class HAddress
         get { return _Address; }
         set { _Address = value; }
     }
-    [JsonIgnore]
+     
     [XmlIgnore]
     public string? FullAddress
     {
@@ -38,7 +38,7 @@ public class MultiAddress : ICheckNull
 
     [XmlElement(ElementName = "ADDRESSNAME")]
     public string AddressName { get; set; }
-    [JsonIgnore]
+     
     [XmlElement(ElementName = "ADDRESS.LIST")]
     public HAddress FAddress;
 

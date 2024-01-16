@@ -41,7 +41,7 @@ public class Godown : BasicTallyObject, IAliasTallyObject
     [XmlElement(ElementName = "PARENTID")]
     [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
     public string? ParentId { get; set; }
-    [JsonIgnore]
+     
     [XmlElement(ElementName = "ADDRESS.LIST")]
     public HAddress FAddress { get; set; }
 
@@ -85,7 +85,7 @@ public class Godown : BasicTallyObject, IAliasTallyObject
     public string? Alias { get; set; }
 
 
-    [JsonIgnore]
+     
     [XmlElement(ElementName = "LANGUAGENAME.LIST")]
     [TDLCollection(CollectionName = "LanguageName")]
     public List<LanguageNameList> LanguageNameList { get; set; }

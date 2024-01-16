@@ -144,7 +144,7 @@ public class Employee : CostCenter.CostCentre
 
 
 
-    [JsonIgnore]
+     
     [XmlElement(ElementName = "ADDRESS.LIST")]
     public HAddress FAddress { get; set; }
 

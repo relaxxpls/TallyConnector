@@ -3,19 +3,25 @@
 public class TallyBaseObject
 {
     [NotMapped]
-    [JsonIgnore]
     [XmlAnyElement()]
-    public XmlElement[]? OtherFields { get; set; }
+    public XmlElement[]? OtherFields
+    {
+        get; set;
+    }
 
     [NotMapped]
-    [JsonIgnore]
     [XmlAnyAttribute]
-    public XmlAttribute[]? OtherAttributes { get; set; }
+    public XmlAttribute[]? OtherAttributes
+    {
+        get; set;
+    }
 
     /// <summary>
     /// Removes Null Childs that are created during xml deserilisation
     /// </summary>
-    public virtual void RemoveNullChilds() { }
+    public virtual void RemoveNullChilds ()
+    {
+    }
 }
 
 public class TallyXmlJson : TallyBaseObject
@@ -23,12 +29,14 @@ public class TallyXmlJson : TallyBaseObject
     /// <summary>
     /// Accepted Values //Create, Alter, Delete
     /// </summary>
-    [JsonIgnore]
     [NotMapped]
     [XmlAttribute(AttributeName = "Action")]
-    public Action Action { get; set; }
+    public Action Action
+    {
+        get; set;
+    }
 
-    public string GetJson(bool Indented = false)
+    public string GetJson ( bool Indented = false )
     {
         string Json = JsonSerializer.Serialize(
             this,
@@ -43,7 +51,7 @@ public class TallyXmlJson : TallyBaseObject
         return Json;
     }
 
-    public string GetXML(XmlAttributeOverrides? attrOverrides = null, bool indent = false)
+    public string GetXML ( XmlAttributeOverrides? attrOverrides = null, bool indent = false )
     {
         TextWriter textWriter = new StringWriter();
         XmlWriterSettings settings =
@@ -70,22 +78,36 @@ public class TallyXmlJson : TallyBaseObject
 public class BasicTallyObject : TallyXmlJson, ITallyObject, IBasicTallyObject
 {
     [XmlElement(ElementName = "MASTERID")]
-    public ulong? MasterId { get; set; }
+    public ulong? MasterId
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "GUID")]
     [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
-    public string? GUID { get; set; }
+    public string? GUID
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "REMOTEALTGUID")]
     [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
-    public string? RemoteId { get; set; }
+    public string? RemoteId
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "ALTERID")]
-    public ulong? AlterId { get; set; }
+    public ulong? AlterId
+    {
+        get; set;
+    }
 
-    public void PrepareForExport() { }
+    public void PrepareForExport ()
+    {
+    }
 
-    public override string ToString()
+    public override string ToString ()
     {
         return GUID ?? string.Empty;
     }

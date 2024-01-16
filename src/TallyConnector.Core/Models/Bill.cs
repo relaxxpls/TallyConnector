@@ -126,7 +126,7 @@ public class Bill : BasicTallyObject, ITallyObject
 
     //Shipping Details
     [TallyCategory("ShippingDetails")]
-    [JsonIgnore]
+     
     [XmlElement(ElementName = "BASICSHIPDELIVERYNOTE")]
     public DeliveryNotes DeliveryNotes
     {
@@ -319,7 +319,7 @@ public class Bill : BasicTallyObject, ITallyObject
     [XmlElement(ElementName = "ATTENDANCEENTRIES.LIST")]
     public List<AttendanceEntry>? AttendanceEntries { get; set; }
 
-    [JsonIgnore]
+     
     [XmlAttribute(AttributeName = "DATE")]
     [NotMapped]
     public string? Dt
@@ -338,7 +338,7 @@ public class Bill : BasicTallyObject, ITallyObject
         set => Date = value ?? string.Empty;
     }
 
-    [JsonIgnore]
+     
     [NotMapped]
     [XmlAttribute(AttributeName = "VCHTYPE")]
     public string? VchType
@@ -347,7 +347,7 @@ public class Bill : BasicTallyObject, ITallyObject
         set { VoucherType = value; }
     }
 
-    [JsonIgnore]
+     
     [NotMapped]
     [XmlAttribute(AttributeName = "MASTERID")]
     public string? _MasterId

@@ -8,7 +8,7 @@ public class Unit : BasicTallyObject, INamedTallyObject
 {
     [XmlAttribute(AttributeName = "NAME")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
-    [JsonIgnore]
+     
     public string? OldName { get; set; }
 
     private string? name;

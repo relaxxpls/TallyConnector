@@ -23,7 +23,7 @@ public class Currency : BasicTallyObject, INamedTallyObject
     }
 
     [XmlAttribute(AttributeName = "NAME")]
-    [JsonIgnore]
+     
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? Name { get; set; }
 

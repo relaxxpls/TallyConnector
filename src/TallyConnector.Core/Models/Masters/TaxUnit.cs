@@ -7,7 +7,7 @@ public class TaxUnit : BasicTallyObject, IAliasTallyObject
 
 
     [XmlAttribute(AttributeName = "NAME")]
-    [JsonIgnore]
+     
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? OldName { get; set; }
     /// <summary>
@@ -28,7 +28,7 @@ public class TaxUnit : BasicTallyObject, IAliasTallyObject
     [XmlIgnore]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? Alias { get; set; }
-    [JsonIgnore]
+     
     [XmlElement(ElementName = "LANGUAGENAME.LIST")]
     [TDLCollection(CollectionName = "LanguageName")]
     public List<LanguageNameList> LanguageNameList { get; set; }
