@@ -3,6 +3,18 @@
 [XmlRoot(ElementName = "BILL")]
 public class Bill : TallyBaseObject
 {
+    [XmlAttribute(AttributeName = "NAME")]
+    public string Name
+    {
+        get; set;
+    }
+
+    [XmlElement(ElementName = "BILLDATE")]
+    public TallyDate BillDate
+    {
+        get; set;
+    }
+
     [XmlElement(ElementName = "BILLID")]
     public int BillId
     {

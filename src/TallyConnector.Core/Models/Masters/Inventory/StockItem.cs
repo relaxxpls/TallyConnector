@@ -5,15 +5,18 @@
 [TallyObjectType(TallyObjectType.StockItems)]
 public class StockItem : BasicTallyObject, IAliasTallyObject
 {
-    public StockItem()
+    public StockItem ()
     {
         LanguageNameList = new();
     }
 
     [XmlAttribute(AttributeName = "OLDNAME")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
-     
-    public string? OldName { get; set; }
+
+    public string? OldName
+    {
+        get; set;
+    }
 
     private string? name;
 
@@ -32,152 +35,269 @@ public class StockItem : BasicTallyObject, IAliasTallyObject
 
     [XmlElement(ElementName = "PARENT")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
-    public string? StockGroup { get; set; }
+    public string? StockGroup
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "PARENTID")]
     [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
-    public string? StockGroupId { get; set; }
+    public string? StockGroupId
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "CATEGORY")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
-    public string? Category { get; set; }
+    public string? Category
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "CATEGORYID")]
     [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
-    public string? CategoryId { get; set; }
+    public string? CategoryId
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "GSTAPPLICABLE")]
-    public string? GSTApplicable { get; set; }
+    public string? GSTApplicable
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "GSTTYPEOFSUPPLY")]
-    public string? GSTTypeOfSupply { get; set; }
+    public string? GSTTypeOfSupply
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "TCSAPPLICABLE")]
-    public string? TCSApplicable { get; set; }
+    public string? TCSApplicable
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "DESCRIPTION")]
-    public string? Description { get; set; }
+    public string? Description
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "NARRATION")]
-    public string? Narration { get; set; }
+    public string? Narration
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "COSTINGMETHOD")]
-    public string? CostingMethod { get; set; }
+    public string? CostingMethod
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "VALUATIONMETHOD")]
-    public string? ValuationMethod { get; set; }
+    public string? ValuationMethod
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "ISCOSTTRACKINGON")]
     [Column(TypeName = "nvarchar(3)")]
-    public TallyYesNo? IsCostTracking { get; set; }
+    public TallyYesNo? IsCostTracking
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "ISCOSTCENTRESON")]
     [Column(TypeName = "nvarchar(3)")]
-    public TallyYesNo? IsCostCentresOn { get; set; }
+    public TallyYesNo? IsCostCentresOn
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "ISBATCHWISEON")]
     [Column(TypeName = "nvarchar(3)")]
-    public TallyYesNo? MaintainInBranches { get; set; }
+    public TallyYesNo? MaintainInBranches
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "ISPERISHABLEON")]
     [Column(TypeName = "nvarchar(3)")]
-    public TallyYesNo? UseExpiryDates { get; set; }
+    public TallyYesNo? UseExpiryDates
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "HASMFGDATE")]
-    public TallyYesNo? TrackDateOfManufacturing { get; set; }
+    public TallyYesNo? TrackDateOfManufacturing
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "BASEUNITS")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
-    public string? BaseUnit { get; set; }
+    public string? BaseUnit
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "BASEUNITID")]
     [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
-    public string? BaseUnitId { get; set; }
+    public string? BaseUnitId
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "ADDITIONALUNITS")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
-    public string? AdditionalUnits { get; set; }
+    public string? AdditionalUnits
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "ADDITIONALUNITID")]
     [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
-    public string? AdditionalUnitsId { get; set; }
+    public string? AdditionalUnitsId
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "INCLUSIVETAX")]
-    public TallyYesNo? InclusiveOfTax { get; set; }
+    public TallyYesNo? InclusiveOfTax
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "DENOMINATOR")]
     [Column(TypeName = "decimal(9,4)")]
-    public decimal? Denominator { get; set; }
+    public decimal? Denominator
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "CONVERSION")]
     [Column(TypeName = "decimal(9,4)")]
-    public decimal? Conversion { get; set; }
+    public decimal? Conversion
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "BASICRATEOFEXCISE")]
-    public string? RateOfDuty { get; set; }
+    public string? RateOfDuty
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "OPENINGBALANCE")]
-    public TallyQuantity? OpeningBal { get; set; }
+    public TallyQuantity? OpeningBal
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "OPENINGVALUE")]
-    public TallyAmount? OpeningValue { get; set; }
+    public TallyAmount? OpeningValue
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "OPENINGRATE")]
-    public TallyRate? OpeningRate { get; set; }
+    public TallyRate? OpeningRate
+    {
+        get; set;
+    }
+
+    [XmlElement(ElementName = "CLOSINGBALANCE")]
+    public TallyQuantity? ClosingBal
+    {
+        get; set;
+    }
+
+    [XmlElement(ElementName = "CLOSINGVALUE")]
+    public TallyAmount? ClosingValue
+    {
+        get; set;
+    }
+
+    [XmlElement(ElementName = "CLOSINGRATE")]
+    public TallyRate? ClosingRate
+    {
+        get; set;
+    }
 
     [XmlIgnore]
-    public string? Alias { get; set; }
+    public string? Alias
+    {
+        get; set;
+    }
 
-     
+
     [XmlElement(ElementName = "LANGUAGENAME.LIST")]
     [TDLCollection(CollectionName = "LanguageName")]
-    public List<LanguageNameList> LanguageNameList { get; set; }
+    public List<LanguageNameList> LanguageNameList
+    {
+        get; set;
+    }
 
     /// <summary>
     ///  in Tally UI - Part No and Part No alias
     /// </summary>
     [XmlArray(ElementName = "MAILINGNAME.LIST")]
     [XmlArrayItem(ElementName = "MAILINGNAME")]
-    public List<string> MailingNames { get; set; }
+    public List<string> MailingNames
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "MULTICOMPONENTLIST.LIST")]
-    public List<ComponentsList>? BOMList { get; set; }
+    public List<ComponentsList>? BOMList
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "GSTDETAILS.LIST")]
-    public List<GSTDetail>? GSTDetails { get; set; }
+    public List<GSTDetail>? GSTDetails
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "HSNDETAILS.LIST")]
-    public List<HSNDetail>? HSNDetails { get; set; }
-
-    public void CreateNamesList()
+    public List<HSNDetail>? HSNDetails
     {
-        if (LanguageNameList.Count == 0)
+        get; set;
+    }
+
+    public void CreateNamesList ()
+    {
+        if ( LanguageNameList.Count == 0 )
         {
             LanguageNameList.Add(new LanguageNameList());
             LanguageNameList[0].NameList?.NAMES?.Add(Name);
         }
-        if (Alias != null && Alias != string.Empty)
+        if ( Alias != null && Alias != string.Empty )
         {
             LanguageNameList[0].LanguageAlias = Alias;
         }
     }
 
-    public new string GetXML(XmlAttributeOverrides? attrOverrides = null, bool indent = false)
+    public new string GetXML ( XmlAttributeOverrides? attrOverrides = null, bool indent = false )
     {
         CreateNamesList();
         return base.GetXML(attrOverrides, indent);
     }
 
-    public new void PrepareForExport()
+    public new void PrepareForExport ()
     {
-        if (StockGroup != null && StockGroup.Contains("Primary"))
+        if ( StockGroup != null && StockGroup.Contains("Primary") )
         {
             StockGroup = null;
         }
         CreateNamesList();
     }
 
-    public override string ToString()
+    public override string ToString ()
     {
         return $"StockItem - {Name}";
     }
@@ -187,18 +307,30 @@ public class StockItem : BasicTallyObject, IAliasTallyObject
 public class HSNDetail : TallyBaseObject, ICheckNull
 {
     [XmlElement(ElementName = "APPLICABLEFROM")]
-    public TallyDate? ApplicableFrom { get; set; }
+    public TallyDate? ApplicableFrom
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "HSNCODE")]
-    public string? HSNCode { get; set; }
+    public string? HSNCode
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "HSN")]
-    public string? HSNDescription { get; set; }
+    public string? HSNDescription
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "SRCOFHSNDETAILS")]
-    public string SourceOfHSNDetails { get; set; }
+    public string SourceOfHSNDetails
+    {
+        get; set;
+    }
 
-    public bool IsNull()
+    public bool IsNull ()
     {
         return false;
     }
