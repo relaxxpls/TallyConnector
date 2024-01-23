@@ -157,6 +157,13 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
         get; set;
     }
 
+
+    [XmlElement(ElementName = "CLOSINGBALANCE")]
+    public TallyAmount? ClosingBal
+    {
+        get; set;
+    }
+
     private string? _Currency;
 
     [XmlElement(ElementName = "CURRENCYNAME")]
