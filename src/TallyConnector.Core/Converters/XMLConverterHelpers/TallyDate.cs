@@ -7,7 +7,7 @@ namespace TallyConnector.Core.Converters.XMLConverterHelpers;
 [JsonConverter(typeof(TallyDateJsonConverter))]
 public class TallyDate : IXmlSerializable
 {
-    private protected DateTime Date;
+    public DateTime Date;
 
     public TallyDate(DateTime date)
     {
@@ -46,7 +46,6 @@ public class TallyDate : IXmlSerializable
         else return null;
 
     }
-
 
     public XmlSchema? GetSchema()
     {

@@ -2,19 +2,18 @@
 
 public class TallyBaseObject
 {
-    [NotMapped]
-    [XmlAnyElement()]
-    public XmlElement[]? OtherFields
-    {
-        get; set;
-    }
+    //    [NotMapped]
+    //    [XmlAnyElement()]
+    //    public XmlElement[]? OtherFields
+    //    {
+    //        get; set;
+    //    }
 
-    [NotMapped]
-    [XmlAnyAttribute]
-    public XmlAttribute[]? OtherAttributes
-    {
-        get; set;
-    }
+    //    [NotMapped]
+    //    [XmlAnyAttribute]
+    //    public XmlAttribute[]? OtherAttributes
+    //    {
+    //        get; set;
 
     /// <summary>
     /// Removes Null Childs that are created during xml deserilisation

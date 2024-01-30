@@ -1240,7 +1240,7 @@ public class AttendanceEntry
     [XmlElement(ElementName = "EMPLOYEEID")]
     [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
     [JsonPropertyName("employee_id")]
-    public string EmployeeId
+    public string? EmployeeId
     {
         get; set;
     }
@@ -1500,7 +1500,7 @@ public class CategoryEntry
 
     [XmlElement(ElementName = "CATEGORYID")]
     [JsonPropertyName("category_id")]
-    public string CategoryId
+    public string? CategoryId
     {
         get; set;
     }
@@ -1525,7 +1525,7 @@ public class EmployeeEntry
 
     [XmlElement(ElementName = "EMPLOYEEID")]
     [JsonPropertyName("employee_id")]
-    public string EmployeeId
+    public string? EmployeeId
     {
         get; set;
     }
@@ -1564,7 +1564,7 @@ public class PayHeadAllocation
 
     [XmlElement(ElementName = "LEDGERID")]
     [JsonPropertyName("ledger_id")]
-    public string LedgerId
+    public string? LedgerId
     {
         get; set;
     }
