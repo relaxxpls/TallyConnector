@@ -151,7 +151,7 @@ public partial class TallyService
         return await GetCompaniesAsync<Company>(token);
     }
     /// <inheritdoc/>
-    public async Task<LastAlterIdsRoot?> GetLastAlterIdsAsync(CancellationToken token = default)
+    public async Task<LastAlterIdsRoot?> GetLastAlterIdsAsync(string? companyName=null, CancellationToken token = default)
     {
         _logger?.LogInformation("Getting Last AlterIds from Tally");
         string reportName = "AlterIdsReport";
@@ -159,8 +159,9 @@ public partial class TallyService
         {
             SVFromDate = Company?.StartingFrom,
             SVToDate = GetToDate(),
-            SVCompany = Company?.Name,
+            SVCompany = (companyName != null) ? companyName : Company?.Name,
         });
+
         TDLMessage tdlMessage = new()
         {
             Report = new() { new(reportName) },

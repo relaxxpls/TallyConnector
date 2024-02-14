@@ -403,6 +403,7 @@ public partial class TallyService : ITallyService
                 IsInitialize = objectOptions?.IsInitialize ?? YesNo.No,
                 DisableCountRequest = CurrentPage != 1,
             };
+
             var paginatedResp = await GetObjectsAsync<ObjType>(options, token);
             if (mapping != null)
             {

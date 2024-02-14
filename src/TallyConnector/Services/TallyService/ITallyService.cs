@@ -53,7 +53,7 @@ public interface ITallyService
     /// Gets Last AlterId in Master and Voucher
     /// </summary>
     /// <returns>instance of LastMasterIdsRoot</returns>
-    Task<LastAlterIdsRoot?> GetLastAlterIdsAsync(CancellationToken token = default);
+    Task<LastAlterIdsRoot?> GetLastAlterIdsAsync(string? companyName=null, CancellationToken token = default);
 
     /// <summary>
     /// Gets List of companies that are in Default Data Path of Tally
