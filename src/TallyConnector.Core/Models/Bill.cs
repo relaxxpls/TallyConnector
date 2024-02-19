@@ -6,6 +6,9 @@ public class Bill : TallyBaseObject
     [XmlAttribute(AttributeName = "NAME")]
     public string Name { get; set; }
 
+    [XmlElement(ElementName = "PARENT")]
+    public string LedgerName { get; set; }
+
     [XmlElement(ElementName = "BILLDATE")]
     public TallyDate BillDate { get; set; }
 
@@ -22,5 +25,5 @@ public class Bill : TallyBaseObject
     public TallyAmount FinalBal { get; set; }
 
     [XmlElement(ElementName = "BILLCREDITPERIOD")]
-    public TallyDate BillCreditPeriod { get; set; }
+    public TallyDueDate BillCreditPeriod { get; set; }
 }
