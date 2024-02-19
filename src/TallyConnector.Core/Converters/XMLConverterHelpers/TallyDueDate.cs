@@ -2,19 +2,18 @@
 using System.Xml.Schema;
 
 namespace TallyConnector.Core.Converters.XMLConverterHelpers;
+
 [JsonConverter(typeof(TallyDueDateJsonConverter))]
 public class TallyDueDate : IXmlSerializable
 {
-    public TallyDueDate()
-    {
-    }
-
+    public TallyDueDate() { }
 
     public TallyDueDate(DateTime dueDate, DateTime? billDate = null)
     {
         DueDate = dueDate;
         BillDate = billDate ?? DateTime.Now;
     }
+
     public TallyDueDate(int value, DueDateFormat suffix, DateTime? billDate = null)
     {
         Value = value;
@@ -23,9 +22,9 @@ public class TallyDueDate : IXmlSerializable
     }
 
     public DateTime BillDate { get; set; }
-    public int Value { get; private set; }
-    public DueDateFormat? Suffix { get; private set; }
-    public DateTime? DueDate { get; private set; }
+    public int Value { get; set; }
+    public DueDateFormat? Suffix { get; set; }
+    public DateTime? DueDate { get; set; }
 
     public XmlSchema? GetSchema()
     {
@@ -41,14 +40,28 @@ public class TallyDueDate : IXmlSerializable
         {
             if (JD != null)
             {
-                BillDate = new DateTime(1900, 1, 1).AddDays(int.Parse(JD,CultureInfo.InvariantCulture) - 1);
+                BillDate = new DateTime(1900, 1, 1).AddDays(
+                    int.Parse(JD, CultureInfo.InvariantCulture) - 1
+                );
             }
 
             if (tValue.Contains('-'))
             {
                 Suffix = DueDateFormat.Date;
-                bool v = DateTime.TryParseExact(tValue, "d-MMM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date);
-                bool sdate = DateTime.TryParseExact(tValue, "d-MMM-yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime ShrtDate);
+                bool v = DateTime.TryParseExact(
+                    tValue,
+                    "d-MMM-yyyy",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out DateTime date
+                );
+                bool sdate = DateTime.TryParseExact(
+                    tValue,
+                    "d-MMM-yy",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out DateTime ShrtDate
+                );
                 if (v)
                 {
                     DueDate = date;
@@ -60,10 +73,9 @@ public class TallyDueDate : IXmlSerializable
             }
             else
             {
-               
                 var splittedvalues = tValue.Split(' ');
                 var suffix = splittedvalues.Last().Trim();
-                Value = int.Parse(splittedvalues.First(),CultureInfo.InvariantCulture);
+                Value = int.Parse(splittedvalues.First(), CultureInfo.InvariantCulture);
                 if (suffix.Contains("Days"))
                 {
                     Suffix = DueDateFormat.Day;
@@ -81,15 +93,16 @@ public class TallyDueDate : IXmlSerializable
                     Suffix = DueDateFormat.Year;
                 }
 
-                DueDate = Suffix == DueDateFormat.Month ?
-                    BillDate.AddMonths(Value) : Suffix == DueDateFormat.Year ?
-                    BillDate.AddYears(Value) : Suffix == DueDateFormat.Week ? BillDate.AddDays(Value * 7) : BillDate.AddDays(Value);
-
-
+                DueDate =
+                    Suffix == DueDateFormat.Month
+                        ? BillDate.AddMonths(Value)
+                        : Suffix == DueDateFormat.Year
+                            ? BillDate.AddYears(Value)
+                            : Suffix == DueDateFormat.Week
+                                ? BillDate.AddDays(Value * 7)
+                                : BillDate.AddDays(Value);
             }
-
         }
-
     }
 
     public void WriteXml(XmlWriter writer)
@@ -97,16 +110,18 @@ public class TallyDueDate : IXmlSerializable
         if (this != null)
         {
             writer.WriteAttributeString("TYPE", "Due Date");
-            writer.WriteAttributeString("JD", (Math.Abs(((new DateTime(1900, 1, 1) - BillDate).Days))+1).ToString());
+            writer.WriteAttributeString(
+                "JD",
+                (Math.Abs(((new DateTime(1900, 1, 1) - BillDate).Days)) + 1).ToString()
+            );
             if (Value != 0 && Suffix != null)
             {
                 writer.WriteString($"{Value} {Suffix}s");
             }
             else if (DueDate != null)
             {
-                writer.WriteString(DueDate?.ToString("dd-MMM-yyyy",CultureInfo.InvariantCulture));
+                writer.WriteString(DueDate?.ToString("dd-MMM-yyyy", CultureInfo.InvariantCulture));
             }
-
         }
     }
 
