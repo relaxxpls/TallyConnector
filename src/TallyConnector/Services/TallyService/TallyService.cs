@@ -356,6 +356,7 @@ public partial class TallyService : ITallyService
         CollectionRequestOptions collectionOptions = new()
         {
             CollectionType = RootAttribute?.ElementName ?? typeof(ObjType).Name,
+            Company = objectOptions?.Company,
             FromDate = objectOptions?.FromDate,
             ToDate = objectOptions?.ToDate,
             FetchList = (objectOptions?.FetchList) != null ? new(objectOptions.FetchList) : null,
@@ -389,6 +390,7 @@ public partial class TallyService : ITallyService
             var options = new PaginatedRequestOptions()
             {
                 FromDate = objectOptions?.FromDate,
+                Company = objectOptions?.Company,
                 ToDate = objectOptions?.ToDate,
                 FetchList = objectOptions?.FetchList,
                 Filters = objectOptions?.Filters,
