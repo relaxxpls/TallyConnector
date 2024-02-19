@@ -9,6 +9,9 @@ public class Bill : TallyBaseObject
     [XmlElement(ElementName = "PARENT")]
     public string LedgerName { get; set; }
 
+    [XmlElement(ElementName = "PARENTGROUPNAME")]
+    public string LedgerGroupName { get; set; }
+
     [XmlElement(ElementName = "BILLDATE")]
     public TallyDate BillDate { get; set; }
 
