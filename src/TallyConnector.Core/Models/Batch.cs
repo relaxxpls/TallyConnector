@@ -10,7 +10,7 @@ public class Batch : TallyBaseObject
     public int BatchId { get; set; }
     
     [XmlElement(ElementName = "PARENT")]
-    public string LedgerName { get; set; }
+    public string ItemName { get; set; }
 
     [XmlElement(ElementName = "DATE")]
     public TallyDate Date { get; set; }
