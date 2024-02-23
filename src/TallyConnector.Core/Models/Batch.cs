@@ -24,5 +24,5 @@ public class Batch : TallyBaseObject
     public string GodownName { get; set; }
 
     [XmlElement(ElementName = "CLOSINGBALANCE")]
-    public TallyAmount ClosingBal { get; set; }
+    public TallyQuantity ClosingBal { get; set; }
 }
