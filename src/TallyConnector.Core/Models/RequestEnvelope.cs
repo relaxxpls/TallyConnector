@@ -611,8 +611,15 @@ public class Collection : DCollection
     [XmlElement(ElementName = "SOURCECOLLECTION")]
     public string? Collections { get; set; }
 
+    [XmlElement(ElementName = "COLLECTION")]
+    public string? NormalCollections { get; set; }
+
     [XmlElement(ElementName = "NATIVEMETHOD")]
     public List<string>? NativeFields { get; set; }
+
+
+    [XmlElement(ElementName = "FETCH")]
+    public List<string>? FetchFields { get; set; }
 
     [XmlElement(ElementName = "COMPUTE")]
     public List<string>? Compute { get; set; }
