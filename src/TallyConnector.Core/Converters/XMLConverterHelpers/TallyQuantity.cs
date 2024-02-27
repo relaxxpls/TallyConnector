@@ -81,7 +81,7 @@ public class TallyQuantity : IXmlSerializable
             {
                 content = content.Trim();
                 var matches = Regex.Matches(content, @"\b[0-9.]+\b");
-                if ( matches.Count == 2 )
+                if ( matches.Count == 2 && matches[1].Value != ".")
                 {
                     Number = decimal.Parse(matches[0].Value, CultureInfo.InvariantCulture);
                     var splittedtext = content.Split('=');

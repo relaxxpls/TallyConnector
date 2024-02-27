@@ -56,10 +56,11 @@ public class TallyRate : IXmlSerializable
             if (content != null && content != string.Empty)
             {
                 var matches = Regex.Matches(content, @"\b[0-9.]+\b");
-                if (matches.Count == 2)
+                if (matches.Count == 2 && matches[1].Value != ".")
                 {
                     ForexAmount = decimal.Parse(matches[0].Value, CultureInfo.InvariantCulture);
                     RatePerUnit = decimal.Parse(matches[1].Value, CultureInfo.InvariantCulture);
+                    
                     ForeignCurrency = content[0].ToString();
                     Unit = content.Split('/').Last();
                 }

@@ -127,6 +127,14 @@ public class StockItem : BasicTallyObject, IAliasTallyObject
     [XmlElement(ElementName = "CLOSINGBALANCE")]
     public TallyQuantity? ClosingBal { get; set; }
 
+    [XmlElement(ElementName = "PURCQTY")]
+    public TallyQuantity? TotalQuantityInPurchase { get; set; }
+
+
+    [XmlElement(ElementName = "SALEQTY")]
+    public TallyQuantity? TotalQuantityInSale { get; set; }
+
+
     [XmlElement(ElementName = "CLOSINGVALUE")]
     public TallyAmount? ClosingValue { get; set; }
 
