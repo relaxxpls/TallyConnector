@@ -8,8 +8,8 @@ namespace TallyConnector.Core.Models
 {
     public class VoucherUserTypeInfo
     {
-        public string GUID { get; set; }
-        public string VoucherNumber { get; set; }
+        public string VoucherId { get; set; }
+        public string BillNumber { get; set; }
         public string BrokerName { get; set; }
         public decimal? Brokerage { get; set; }  
         public decimal? TotalBrokerCommission { get; set; }  
