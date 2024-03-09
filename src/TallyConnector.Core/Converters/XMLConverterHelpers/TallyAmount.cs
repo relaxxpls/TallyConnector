@@ -88,7 +88,7 @@ public class TallyAmount : IXmlSerializable
 
     public bool PreserveAmount
     {
-        get; private set;
+        get; set;
     }
 
     public XmlSchema? GetSchema ()

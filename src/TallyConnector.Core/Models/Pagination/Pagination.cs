@@ -15,8 +15,8 @@ public class Pagination : PaginationBase
         GoToPage(PageNum);
     }
 
-    public int Start { get; private set; }
-    public int End { get; private set; }
+    public int Start { get; set; }
+    public int End { get; set; }
 
     public string GetFilterFormulae()
     {

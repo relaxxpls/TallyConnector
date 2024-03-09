@@ -139,9 +139,9 @@ public class Statistics
     public List<MasterTypeStat>? MasterStats { get; set; }
 
     [XmlIgnore]
-    public int TotalVouchersCount { get; private set; }
+    public int TotalVouchersCount { get; set; }
     [XmlIgnore]
-    public int TotalMastersCount { get; private set; }
+    public int TotalMastersCount { get; set; }
 
     public void CalculateTotals()
     {

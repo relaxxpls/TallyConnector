@@ -30,8 +30,8 @@ public class TallyRate : IXmlSerializable
     }
 
     [Column(TypeName = "decimal(20,6)")]
-    public decimal RatePerUnit { get; private set; }
-    public string Unit { get; private set; }
+    public decimal RatePerUnit { get; set; }
+    public string Unit { get; set; }
 
     [Column(TypeName = "decimal(20,6)")]
     public decimal? ForexAmount { get; set; }
