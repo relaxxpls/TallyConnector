@@ -29,4 +29,7 @@ public class Bill : TallyBaseObject
 
     [XmlElement(ElementName = "BILLCREDITPERIOD")]
     public TallyDueDate BillCreditPeriod { get; set; }
+
+    [XmlElement(ElementName = "ISADVANCE")]
+    public TallyYesNo? IsAdvance { get; set; }
 }
