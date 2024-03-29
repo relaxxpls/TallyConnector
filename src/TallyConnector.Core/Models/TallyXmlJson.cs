@@ -97,7 +97,7 @@ public class BasicTallyObject : TallyXmlJson, ITallyObject, IBasicTallyObject
     }
 
     [XmlElement(ElementName = "ALTERID")]
-    public ulong? AlterId
+    public long? AlterId
     {
         get; set;
     }
