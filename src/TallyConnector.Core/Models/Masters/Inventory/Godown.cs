@@ -79,16 +79,22 @@ public class Godown : BasicTallyObject, IAliasTallyObject
     [XmlElement(ElementName = "CANDELETE")]
     public TallyYesNo? CanDelete { get; set; }
 
+    [XmlElement(ElementName = "DEPTH")]
+    public int Depth { get; set; }
 
     [XmlIgnore]
     [Column(TypeName = "nvarchar(60)")]
     public string? Alias { get; set; }
 
-
-     
     [XmlElement(ElementName = "LANGUAGENAME.LIST")]
     [TDLCollection(CollectionName = "LanguageName")]
     public List<LanguageNameList> LanguageNameList { get; set; }
+
+    [XmlElement(ElementName = "CLOSINGBALANCE")]
+    public TallyQuantity ClosingBal { get; set; }
+
+    [XmlElement(ElementName = "CLOSINGVALUE")]
+    public TallyAmount? ClosingValue { get; set; }
 
 
     public void CreateNamesList()

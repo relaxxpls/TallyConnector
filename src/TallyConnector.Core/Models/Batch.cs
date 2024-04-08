@@ -15,14 +15,18 @@ public class Batch : TallyBaseObject
     [XmlElement(ElementName = "DATE")]
     public TallyDate Date { get; set; }
 
-
     [XmlElement(ElementName = "MFDON")]
     public TallyDate ManufacturingDate { get; set; }
-
 
     [XmlElement(ElementName = "GODOWNNAME")]
     public string GodownName { get; set; }
 
     [XmlElement(ElementName = "CLOSINGBALANCE")]
     public TallyQuantity ClosingBal { get; set; }
+
+    [XmlElement(ElementName = "CLOSINGRATE")]
+    public TallyRate? ClosingRate { get; set; }
+
+    [XmlElement(ElementName = "CLOSINGVALUE")]
+    public TallyAmount? ClosingValue { get; set; }
 }
