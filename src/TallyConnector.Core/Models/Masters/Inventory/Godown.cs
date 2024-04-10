@@ -91,7 +91,7 @@ public class Godown : BasicTallyObject, IAliasTallyObject
     public List<LanguageNameList> LanguageNameList { get; set; }
 
     [XmlElement(ElementName = "CLOSINGBALANCE")]
-    public TallyQuantity ClosingBal { get; set; }
+    public TallyQuantity? ClosingBal { get; set; }
 
     [XmlElement(ElementName = "CLOSINGVALUE")]
     public TallyAmount? ClosingValue { get; set; }
