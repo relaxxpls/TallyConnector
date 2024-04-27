@@ -203,7 +203,7 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
 
     [XmlElement(ElementName = "GSTDUTYHEAD")]
     [Column(TypeName = "nvarchar(15)")]
-    public GSTTaxType? GSTTaxType
+    public string? GSTTaxType
     {
         get; set;
     }

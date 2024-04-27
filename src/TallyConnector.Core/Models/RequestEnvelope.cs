@@ -120,8 +120,6 @@ public class TDLMessage
 
         filters?.ForEach(filter => System.Add(new(name: filter.FilterName!,
                                                  text: filter.FilterFormulae!)));
-
-        
     }
 
 
