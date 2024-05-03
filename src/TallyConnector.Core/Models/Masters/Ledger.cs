@@ -201,12 +201,12 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
         get; set;
     }
 
-    [XmlElement(ElementName = "GSTDUTYHEAD")]
-    [Column(TypeName = "nvarchar(15)")]
-    public string? GSTTaxType
-    {
-        get; set;
-    }
+    //[XmlElement(ElementName = "GSTDUTYHEAD")]
+    //[Column(TypeName = "nvarchar(15)")]
+    //public string? GSTTaxType
+    //{
+    //    get; set;
+    //}
 
     [XmlElement(ElementName = "RATEOFTAXCALCULATION")]
     public double? RateofTax
