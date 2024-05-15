@@ -99,6 +99,16 @@ public class Company : BaseCompany
     [XmlElement(ElementName = "ISBILLWISEON")]
     public TallyYesNo? IsBillWiseOn { get; set; }
 
+
+    [XmlElement(ElementName = "ISBATCHWISEON")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? MaintainInBranches { get; set; }
+
+    [XmlElement(ElementName = "ISPERISHABLEON")]
+    [Column(TypeName = "nvarchar(3)")]
+    public TallyYesNo? UseExpiryDates { get; set; }
+
+
     [XmlElement(ElementName = "ISCOSTCENTRESON")]
     public TallyYesNo? IsCostCentersOn { get; set; }
 
