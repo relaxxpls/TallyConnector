@@ -16,8 +16,7 @@ public class TallyYesNo : IXmlSerializable
         Value = isYes;
     }
 
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private bool Value { get; set; }
+    public bool Value { get; set; }
     public XmlSchema? GetSchema()
     {
         return null;
@@ -49,8 +48,6 @@ public class TallyYesNo : IXmlSerializable
     {
         throw new NotImplementedException();
     }
-
-
 
     public static implicit operator TallyYesNo(bool IsYes)
     {
