@@ -1,3 +1,5 @@
+using MongoDB.Bson;
+
 namespace TallyConnector.Core.Models;
 
 [Serializable]

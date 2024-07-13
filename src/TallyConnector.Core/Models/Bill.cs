@@ -1,8 +1,17 @@
-﻿using TallyConnector.Core.Models;
+﻿using MongoDB.Bson;
+using TallyConnector.Core.Models;
 
 [XmlRoot(ElementName = "BILL")]
 public class Bill : TallyBaseObject
 {
+
+    [JsonIgnore]
+    public ObjectId? Id { get; set; }
+
+    [JsonPropertyName("id")]
+    public string IdStr => Id.ToString();
+
+
     [XmlAttribute(AttributeName = "NAME")]
     public string Name { get; set; }
 

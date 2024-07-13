@@ -1,4 +1,7 @@
-﻿namespace TallyConnector.Core.Models;
+﻿using MongoDB.Bson;
+using System.Runtime.Serialization;
+
+namespace TallyConnector.Core.Models;
 
 public class TallyBaseObject
 {
@@ -71,6 +74,12 @@ public class TallyXmlJson : TallyBaseObject
 [XmlRoot(ElementName = "OBJECTS")]
 public class BasicTallyObject : TallyXmlJson, ITallyObject, IBasicTallyObject
 {
+    [JsonIgnore]
+    public ObjectId? Id { get; set; }
+
+    [JsonPropertyName("id")]
+    public string IdStr => Id.ToString();
+
     [XmlElement(ElementName = "MASTERID")]
     public ulong? MasterId { get; set; }
 
