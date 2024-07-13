@@ -32,4 +32,6 @@ public class Bill : TallyBaseObject
 
     [XmlElement(ElementName = "ISADVANCE")]
     public TallyYesNo? IsAdvance { get; set; }
+
+    public string? CompanyId { get; set; }
 }
