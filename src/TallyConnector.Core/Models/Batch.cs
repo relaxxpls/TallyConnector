@@ -10,7 +10,8 @@ public class Batch : TallyBaseObject
     [JsonPropertyName("id")]
     public string IdStr => Id.ToString();
 
-
+    [JsonPropertyName("company_id")]
+    public string? CompanyId { get; set; }       
 
     [XmlElement(ElementName = "BATCHNAME")]
     public string Name { get; set; }
