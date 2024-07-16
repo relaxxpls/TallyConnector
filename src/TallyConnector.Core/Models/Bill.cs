@@ -4,12 +4,11 @@ using TallyConnector.Core.Models;
 [XmlRoot(ElementName = "BILL")]
 public class Bill : TallyBaseObject
 {
-    private ObjectId? _id = ObjectId.Empty;
-    
-    public ObjectId? Id 
-    { 
-        get => _id;
-        set => _id = value ?? ObjectId.Empty;
+
+    [JsonIgnore]
+    public ObjectId Id 
+    {
+        get; set;
     }
 
     public string IdStr => Id.ToString();

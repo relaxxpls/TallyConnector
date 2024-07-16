@@ -9,16 +9,10 @@ namespace TallyConnector.Core.Models
 {
     public class VoucherUserTypeInfo
     {
-        private ObjectId? _id = ObjectId.Empty;
-        
-        public ObjectId? Id 
-        { 
-            get => _id;
-            set => _id = value ?? ObjectId.Empty;
+        public ObjectId Id 
+        {
+            get; set;
         }
-
-        public string IdStr => Id.ToString();
-
         public string VoucherId { get; set; }
         public string BillName { get; set; }
         public string BrokerName { get; set; }

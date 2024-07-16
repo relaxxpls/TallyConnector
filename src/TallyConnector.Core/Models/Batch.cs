@@ -4,15 +4,9 @@ using TallyConnector.Core.Models;
 [XmlRoot(ElementName = "BATCH")]
 public class Batch : TallyBaseObject
 {
-    private ObjectId? _id = ObjectId.Empty;
 
     [JsonIgnore]
-    public ObjectId? Id 
-    { 
-        get => _id;
-        set => _id = value ?? ObjectId.Empty;
-    }
-    //public string IdStr => Id.ToString();
+    public ObjectId Id { get; set; }
 
     public string? CompanyId { get; set; }       
 
