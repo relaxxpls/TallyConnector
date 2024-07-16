@@ -74,7 +74,7 @@ public class TallyXmlJson : TallyBaseObject
 [XmlRoot(ElementName = "OBJECTS")]
 public class BasicTallyObject : TallyXmlJson, ITallyObject, IBasicTallyObject
 {
-    [JsonIgnore]
+    [JsonPropertyName("_id")]
     public ObjectId? Id { get; set; }
 
     [JsonPropertyName("id")]

@@ -4,7 +4,7 @@ using TallyConnector.Core.Models;
 [XmlRoot(ElementName = "BATCH")]
 public class Batch : TallyBaseObject
 {
-    [JsonIgnore]
+    [JsonPropertyName("_id")]
     public ObjectId? Id { get; set; }
 
     [JsonPropertyName("id")]

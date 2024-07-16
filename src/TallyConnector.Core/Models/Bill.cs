@@ -5,7 +5,7 @@ using TallyConnector.Core.Models;
 public class Bill : TallyBaseObject
 {
 
-    [JsonIgnore]
+    [JsonPropertyName("_id")]
     public ObjectId? Id { get; set; }
 
     [JsonPropertyName("id")]

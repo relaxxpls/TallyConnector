@@ -42,12 +42,11 @@ public class BaseCompany : TallyXmlJson
 [XmlRoot(ElementName = "COMPANY")]
 public class Company : BaseCompany
 {
-    [JsonIgnore]
+    [JsonPropertyName("_id")]
     public ObjectId? Id { get; set; }
 
     [JsonPropertyName("id")]
     public string IdStr => Id.ToString();
-
 
     [XmlElement(ElementName = "BASICCOMPANYFORMALNAME")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
