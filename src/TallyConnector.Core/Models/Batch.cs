@@ -6,17 +6,13 @@ public class Batch : TallyBaseObject
 {
     private ObjectId? _id = ObjectId.Empty;
     
-    [JsonPropertyName("_id")]
     public ObjectId? Id 
     { 
         get => _id;
         set => _id = value ?? ObjectId.Empty;
     }
-
-    [JsonPropertyName("id")]
     public string IdStr => Id.ToString();
 
-    [JsonPropertyName("company_id")]
     public string? CompanyId { get; set; }       
 
     [XmlElement(ElementName = "BATCHNAME")]

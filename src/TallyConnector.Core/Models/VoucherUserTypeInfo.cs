@@ -11,14 +11,12 @@ namespace TallyConnector.Core.Models
     {
         private ObjectId? _id = ObjectId.Empty;
         
-        [JsonPropertyName("_id")]
         public ObjectId? Id 
         { 
             get => _id;
             set => _id = value ?? ObjectId.Empty;
         }
 
-        [JsonPropertyName("id")]
         public string IdStr => Id.ToString();
 
         public string VoucherId { get; set; }
