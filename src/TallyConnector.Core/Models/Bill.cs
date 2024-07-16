@@ -11,9 +11,6 @@ public class Bill : TallyBaseObject
         get; set;
     }
 
-    public string IdStr => Id.ToString();
-
-
     [XmlAttribute(AttributeName = "NAME")]
     public string Name { get; set; }
 
