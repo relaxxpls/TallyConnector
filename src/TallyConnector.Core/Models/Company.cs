@@ -42,14 +42,14 @@ public class BaseCompany : TallyXmlJson
 [XmlRoot(ElementName = "COMPANY")]
 public class Company : BaseCompany
 {
-    private ObjectId? _id = ObjectId.Empty;
+    //private ObjectId? _id = ObjectId.Empty;
 
     [JsonIgnore]
-    public ObjectId? Id 
-    { 
-        get => _id;
-        set => _id = value ?? ObjectId.Empty;
-    }
+    public ObjectId? Id { get; set; }
+    //{ 
+    //    get => _id;
+    //    set => _id = value ?? ObjectId.Empty;
+    //}
 
     //public string IdStr => Id.ToString();
 
