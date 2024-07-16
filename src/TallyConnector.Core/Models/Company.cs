@@ -45,7 +45,7 @@ public class Company : BaseCompany
     //private ObjectId? _id = ObjectId.Empty;
 
     [JsonIgnore]
-    public ObjectId? Id { get; set; } = null;
+    public ObjectId Id { get; set; }
     //{ 
     //    get => _id;
     //    set => _id = value ?? ObjectId.Empty;
