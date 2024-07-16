@@ -3,7 +3,7 @@ using System.Xml.Schema;
 
 namespace TallyConnector.Core.Converters.XMLConverterHelpers;
 
-[JsonConverter(typeof(TallyDueDateJsonConverter))]
+//[JsonConverter(typeof(TallyDueDateJsonConverter))]
 public class TallyDueDate : IXmlSerializable
 {
     public TallyDueDate() { }
