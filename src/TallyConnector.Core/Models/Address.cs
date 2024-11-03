@@ -13,7 +13,7 @@ public class HAddress
         get { return _Address; }
         set { _Address = value; }
     }
-     
+
     [XmlIgnore]
     public string? FullAddress
     {
@@ -38,7 +38,7 @@ public class MultiAddress : ICheckNull
 
     [XmlElement(ElementName = "ADDRESSNAME")]
     public string AddressName { get; set; }
-     
+
     [XmlElement(ElementName = "ADDRESS.LIST")]
     public HAddress FAddress;
 
@@ -184,3 +184,50 @@ public class ExciseJurisdiction : ICheckNull
     }
 }
 
+/// <summary>
+/// GST Registration details of party ledgers 
+/// Added from Prime3
+/// </summary>
+[XmlRoot(ElementName = "LEDMAILINGDETAILS.LIST")]
+public class LedgerMailingDetails
+{
+    public LedgerMailingDetails()
+    {
+        FAddress = new();
+    }
+
+    [XmlElement("APPLICABLEFROM")]
+    public TallyDate? ApplicableFrom { get; set; }
+
+    [XmlElement(ElementName = "ADDRESS.LIST")]
+    public HAddress FAddress { get; set; }
+
+    [XmlElement(ElementName = "PINCODE")]
+    [Column(TypeName = $"nvarchar({Constants.MaxAmountLength})")]
+    public string? PinCode { get; set; }
+
+    [XmlElement(ElementName = "MAILINGNAME")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string? MailingName { get; set; }
+
+    [XmlElement(ElementName = "STATE")]
+    [Column(TypeName = $"nvarchar({Constants.MaxAmountLength})")]
+    public string? State { get; set; }
+
+    [XmlElement(ElementName = "COUNTRY")]
+    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
+    public string? Country { get; set; }
+
+    [XmlIgnore]
+    public string? Address
+    {
+        get { return FAddress.FullAddress; }
+        set
+        {
+            if (value != "")
+            {
+                FAddress.FullAddress = value;
+            }
+        }
+    }
+}

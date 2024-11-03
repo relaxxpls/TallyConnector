@@ -11,21 +11,7 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
     public Ledger()
     {
         LanguageNameList = new();
-        FAddress = new HAddress();
         Group = string.Empty;
-    }
-
-    /// <summary>
-    /// Create Ledger under Specified Group
-    /// </summary>
-    /// <param name="name"></param>
-    /// <param name="group"></param>
-    public Ledger(string name, string group)
-    {
-        LanguageNameList = new();
-        FAddress = new HAddress();
-        Group = group;
-        this.name = name;
     }
 
     [XmlAttribute(AttributeName = "NAME")]
@@ -173,34 +159,8 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
     [MaxLength(20)]
     public string? CreditLimit { get; set; }
 
-    [XmlElement(ElementName = "MAILINGNAME")]
-    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
-    public string? MailingName { get; set; }
-
-    [XmlIgnore]
-    public string? Address
-    {
-        get { return FAddress.FullAddress; }
-        set
-        {
-            if (value != "")
-            {
-                FAddress.FullAddress = value;
-            }
-        }
-    }
-
-    [XmlElement(ElementName = "COUNTRYNAME")]
-    [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
-    public string? Country { get; set; }
-
-    [XmlElement(ElementName = "LEDSTATENAME")]
-    [Column(TypeName = $"nvarchar({Constants.MaxAmountLength})")]
-    public string? State { get; set; }
-
-    [XmlElement(ElementName = "PINCODE")]
-    [Column(TypeName = $"nvarchar({Constants.MaxAmountLength})")]
-    public string? PinCode { get; set; }
+    [XmlElement(ElementName = "LEDMAILINGDETAILS.LIST")]
+    public List<LedgerMailingDetails>? LedgerMailingDetails { get; set; }
 
     [XmlElement(ElementName = "LEDGERCONTACT")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
@@ -406,9 +366,6 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
     [XmlElement(ElementName = "NARRATION")]
     [Column(TypeName = $"nvarchar({Constants.MaxNarrLength})")]
     public string? Notes { get; set; }
-
-    [XmlElement(ElementName = "ADDRESS.LIST")]
-    public HAddress FAddress { get; set; }
 
     [XmlElement(ElementName = "LANGUAGENAME.LIST")]
     [TDLCollection(CollectionName = "LanguageName")]
