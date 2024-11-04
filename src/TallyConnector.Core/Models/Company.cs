@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-
-namespace TallyConnector.Core.Models;
+﻿namespace TallyConnector.Core.Models;
 /// <summary>
 /// Base Model for Company
 /// </summary>
@@ -14,7 +12,7 @@ public class BaseCompany : TallyXmlJson
     [XmlElement(ElementName = "NAME")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]
     public string? Name { get; set; }
-    
+
     [XmlElement(ElementName = "GUID")]
     [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
     public string? GUID { get; set; }
@@ -43,7 +41,7 @@ public class BaseCompany : TallyXmlJson
 public class Company : BaseCompany
 {
     [JsonIgnore]
-    public ObjectId Id { get; set; }
+    public string Id { get; set; }
 
     [XmlElement(ElementName = "BASICCOMPANYFORMALNAME")]
     [Column(TypeName = $"nvarchar({Constants.MaxNameLength})")]

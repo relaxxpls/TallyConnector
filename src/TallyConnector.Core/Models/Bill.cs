@@ -1,12 +1,11 @@
-﻿using MongoDB.Bson;
-using TallyConnector.Core.Models;
+﻿using TallyConnector.Core.Models;
 
 [XmlRoot(ElementName = "BILL")]
 public class Bill : TallyBaseObject
 {
 
     [JsonIgnore]
-    public ObjectId Id 
+    public string Id
     {
         get; set;
     }

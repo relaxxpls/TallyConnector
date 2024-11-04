@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MongoDB.Bson;
 
 namespace TallyConnector.Core.Models
 {
     public class VoucherUserTypeInfo
     {
-        public ObjectId Id { get; set; }
+        public string Id { get; set; }
         public string VoucherId { get; set; }
         public string BillName { get; set; }
 

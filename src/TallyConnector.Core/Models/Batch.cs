@@ -1,21 +1,20 @@
-﻿using MongoDB.Bson;
-using TallyConnector.Core.Models;
+﻿using TallyConnector.Core.Models;
 
 [XmlRoot(ElementName = "BATCH")]
 public class Batch : TallyBaseObject
 {
 
     [JsonIgnore]
-    public ObjectId Id { get; set; }
+    public string Id { get; set; }
 
-    public string? CompanyId { get; set; }       
+    public string? CompanyId { get; set; }
 
     [XmlElement(ElementName = "BATCHNAME")]
     public string Name { get; set; }
 
     [XmlElement(ElementName = "BATCHID")]
     public int BatchId { get; set; }
-    
+
     [XmlElement(ElementName = "PARENT")]
     public string ItemName { get; set; }
 

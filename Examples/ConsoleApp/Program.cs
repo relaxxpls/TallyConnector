@@ -7,7 +7,6 @@ using ConsoleApp;
 var http = new HttpClient(new LoggingHandler(new HttpClientHandler()));
 var tally = new TallyService(http);
 
-
 // ? Create Ledger
 // var ledger = new Ledger()
 // {
@@ -33,10 +32,9 @@ var tally = new TallyService(http);
 //         }
 //     ],
 // };
-// var resp = await tally.PostLedgerAsync(ledger);
-// Console.WriteLine(resp);
+// await tally.PostLedgerAsync(ledger);
 
-// // ? Create StockItem
+// ? Create StockItem
 // var stockItem = new StockItem()
 // {
 //     OldName = "TallAi - Stock Item",
@@ -81,15 +79,7 @@ var tally = new TallyService(http);
 //         }
 //     ],
 // };
-// var resp = await tally.PostStockItemAsync(stockItem);
-// Console.WriteLine(resp);
-
-// ? View Voucher
-// var options = new MasterRequestOptions();
-// req.LookupField = VoucherLookupField.MasterId;
-// req.FetchList = Constants.Voucher.InvoiceViewFetchList.All;
-// var voucher = await tally.GetVoucherAsync("3", req);
-// options.FetchList = new List<string> { "All" };
+// await tally.PostStockItemAsync(stockItem);
 
 // ? Create Voucher
 var voucher = new Voucher()
@@ -99,20 +89,24 @@ var voucher = new Voucher()
     Date = DateTime.Now,
     ReferenceDate = "2021-04-01",
     Narration = "Bought some items",
-    PartyLedgerName = "TechGear Solutions",
+    // PartyLedgerName = "TechGear Solutions",
     Ledgers = [
         new() {
             LedgerName = "TechGear Solutions",
             Amount = 188800,
         },
         new() {
-            LedgerName = "CGST",
-            Amount = -14400,
-        },
-        new() {
-            LedgerName = "SGST",
-            Amount = -14400,
-        },
+            LedgerName = "IGST",
+            Amount = -28800,
+        }
+        // new() {
+        //     LedgerName = "CGST",
+        //     Amount = -14400,
+        // },
+        // new() {
+        //     LedgerName = "SGST",
+        //     Amount = -14400,
+        // },
     ],
     InventoryAllocations = [
         new() {
