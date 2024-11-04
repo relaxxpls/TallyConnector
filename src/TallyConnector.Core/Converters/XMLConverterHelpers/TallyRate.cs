@@ -12,7 +12,7 @@ public class TallyRate : IXmlSerializable
     {
         Unit = string.Empty;
     }
-    public TallyRate(decimal ratePerUnit, string unit)
+    public TallyRate(decimal ratePerUnit, string unit = "")
     {
         RatePerUnit = ratePerUnit;
         Unit = unit;
@@ -60,7 +60,7 @@ public class TallyRate : IXmlSerializable
                 {
                     ForexAmount = decimal.Parse(matches[0].Value, CultureInfo.InvariantCulture);
                     RatePerUnit = decimal.Parse(matches[1].Value, CultureInfo.InvariantCulture);
-                    
+
                     ForeignCurrency = content[0].ToString();
                     Unit = content.Split('/').Last();
                 }
@@ -90,5 +90,15 @@ public class TallyRate : IXmlSerializable
         {
             return $"{RatePerUnit.ToString(CultureInfo.InvariantCulture)}/{Unit?.ToString(CultureInfo.InvariantCulture)}";
         }
+    }
+
+    public static implicit operator decimal(TallyRate amount)
+    {
+        return amount.RatePerUnit;
+    }
+
+    public static implicit operator TallyRate(decimal amount)
+    {
+        return new TallyRate(amount);
     }
 }

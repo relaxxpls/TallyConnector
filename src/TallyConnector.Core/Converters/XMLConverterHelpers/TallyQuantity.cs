@@ -9,7 +9,7 @@ namespace TallyConnector.Core.Converters.XMLConverterHelpers;
 [JsonConverter(typeof(TallyQuantityJsonConverter))]
 public class TallyQuantity : IXmlSerializable
 {
-    public TallyQuantity ()
+    public TallyQuantity()
     {
     }
     //public TallyQuantity(StockItem stockItem, decimal number)
@@ -21,31 +21,31 @@ public class TallyQuantity : IXmlSerializable
     //    }
 
     //}
-    public TallyQuantity ( StockItem stockItem, decimal quantity )
+    public TallyQuantity(StockItem stockItem, decimal quantity)
     {
         Number = quantity;
-        if ( stockItem.BaseUnit != null && stockItem.BaseUnit != string.Empty )
+        if (stockItem.BaseUnit != null && stockItem.BaseUnit != string.Empty)
         {
             PrimaryUnits = new(quantity, stockItem.BaseUnit);
         }
-        if ( stockItem.AdditionalUnits != null && stockItem.AdditionalUnits != string.Empty )
+        if (stockItem.AdditionalUnits != null && stockItem.AdditionalUnits != string.Empty)
         {
-            if ( stockItem.Conversion != null && stockItem.Denominator != null )
+            if (stockItem.Conversion != null && stockItem.Denominator != null)
             {
-                SecondaryUnits = new(quantity * Math.Round(( ( decimal ) stockItem.Conversion / ( decimal ) stockItem.Denominator ), 2), stockItem.AdditionalUnits);
+                SecondaryUnits = new(quantity * Math.Round(((decimal)stockItem.Conversion / (decimal)stockItem.Denominator), 2), stockItem.AdditionalUnits);
             }
         }
     }
 
-    public TallyQuantity ( decimal quantity, string unit )
+    public TallyQuantity(decimal quantity, string unit = "")
     {
         Number = quantity;
         PrimaryUnits = new(quantity, unit);
     }
-    public TallyQuantity ( decimal quantity,
+    public TallyQuantity(decimal quantity,
                          string unit,
                          decimal secondaryQuantity,
-                         string secondaryUnit )
+                         string secondaryUnit)
     {
         Number = quantity;
         PrimaryUnits = new(quantity, unit);
@@ -65,27 +65,27 @@ public class TallyQuantity : IXmlSerializable
     {
         get; set;
     }
-    public XmlSchema? GetSchema ()
+    public XmlSchema? GetSchema()
     {
         return null;
     }
 
-    public void ReadXml ( XmlReader reader )
+    public void ReadXml(XmlReader reader)
     {
         bool isEmptyElement = reader.IsEmptyElement;
-        if ( !isEmptyElement )
+        if (!isEmptyElement)
         {
             string content = reader.ReadElementContentAsString();
 
-            if ( content != null && content != string.Empty )
+            if (content != null && content != string.Empty)
             {
                 content = content.Trim();
                 var matches = Regex.Matches(content, @"\b[0-9.]+\b");
-                if ( matches.Count == 2 && matches[1].Value != ".")
+                if (matches.Count == 2 && matches[1].Value != ".")
                 {
                     Number = decimal.Parse(matches[0].Value, CultureInfo.InvariantCulture);
                     var splittedtext = content.Split('=');
-                    if ( !content.Contains('=') )
+                    if (!content.Contains('='))
                     {
                         splittedtext = new string[] { content.Substring(0, content.Length / 2), content.Substring(content.Length / 2) };
                     }
@@ -103,14 +103,14 @@ public class TallyQuantity : IXmlSerializable
 
     }
 
-    public void WriteXml ( XmlWriter writer )
+    public void WriteXml(XmlWriter writer)
     {
         writer.WriteString(this.ToString());
     }
 
-    public override string ToString ()
+    public override string ToString()
     {
-        if ( SecondaryUnits != null )
+        if (SecondaryUnits != null)
         {
             return $"{PrimaryUnits?.Number.ToString(CultureInfo.InvariantCulture)} {PrimaryUnits?.Unit.ToString(CultureInfo.InvariantCulture)} = {SecondaryUnits?.Number.ToString(CultureInfo.InvariantCulture)} {SecondaryUnits?.Unit.ToString(CultureInfo.InvariantCulture)}";
         }
@@ -118,6 +118,16 @@ public class TallyQuantity : IXmlSerializable
         {
             return $"{PrimaryUnits?.Number.ToString(CultureInfo.InvariantCulture)} {PrimaryUnits?.Unit.ToString(CultureInfo.InvariantCulture)}";
         }
+    }
+
+    public static implicit operator decimal(TallyQuantity amount)
+    {
+        return amount.Number;
+    }
+
+    public static implicit operator TallyQuantity(decimal amount)
+    {
+        return new TallyQuantity(amount);
     }
 }
 
@@ -134,7 +144,7 @@ public class BaseTallyQuantity
         get; set;
     }
 
-    public BaseTallyQuantity ( decimal number, string unit )
+    public BaseTallyQuantity(decimal number, string unit)
     {
         Number = number;
         Unit = unit;

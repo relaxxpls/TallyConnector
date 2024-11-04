@@ -7,7 +7,7 @@ namespace TallyConnector.Core.Models;
 [TallyObjectType(TallyObjectType.Vouchers)]
 public class Voucher : BasicTallyObject, ITallyObject
 {
-    public Voucher ()
+    public Voucher()
     {
         _DeliveryNotes = new();
     }
@@ -385,10 +385,9 @@ public class Voucher : BasicTallyObject, ITallyObject
         get; set;
     }
 
-    [XmlElement(ElementName = "PARTYLEDGERID")]
-    [Column(TypeName = $"nvarchar({Constants.GUIDLength})")]
-    [JsonPropertyName("party_ledger_id")]
-    public string? PartyLedgerId
+    [XmlElement(ElementName = "PARTYLEDGERNAME")]
+    [JsonPropertyName("party_ledger_name")]
+    public string? PartyLedgerName
     {
         get; set;
     }
@@ -559,7 +558,7 @@ public class Voucher : BasicTallyObject, ITallyObject
     }
 
     [XmlElement(ElementName = "ALLINVENTORYENTRIES.LIST", Type = typeof(AllInventoryAllocations))]
-    [XmlElement(ElementName = "INVENTORYENTRIES.LIST", Type = typeof(InventoryEntries))]
+    // [XmlElement(ElementName = "INVENTORYENTRIES.LIST", Type = typeof(InventoryEntries))]
     [JsonPropertyName("inventory_allocations")]
     public List<AllInventoryAllocations>? InventoryAllocations
     {
@@ -602,9 +601,9 @@ public class Voucher : BasicTallyObject, ITallyObject
     {
         get
         {
-            if ( Date != null )
+            if (Date != null)
             {
-                return ( ( DateTime ) Date! ).ToString("yyyMMdd");
+                return ((DateTime)Date!).ToString("yyyMMdd");
             }
             else
             {
@@ -645,7 +644,7 @@ public class Voucher : BasicTallyObject, ITallyObject
         }
     }
 
-    public void OrderLedgers ()
+    public void OrderLedgers()
     {
         //if (VchType != "Contra" && VchType != "Purchase" && VchType != "Receipt" && VchType != "Credit Note")
         //{
@@ -661,30 +660,30 @@ public class Voucher : BasicTallyObject, ITallyObject
         //}
     }
 
-    public new string GetJson ( bool Indented = false )
+    public new string GetJson(bool Indented = false)
     {
         OrderLedgers();
 
         return base.GetJson(Indented);
     }
 
-    public new string GetXML ( XmlAttributeOverrides? attrOverrides = null )
+    public new string GetXML(XmlAttributeOverrides? attrOverrides = null)
     {
         OrderLedgers();
         GetJulianday();
         return base.GetXML(attrOverrides);
     }
 
-    public void GetJulianday ()
+    public void GetJulianday()
     {
         Ledgers?.ForEach(ledg =>
         {
             ledg.BillAllocations?.ForEach(billalloc =>
             {
-                if ( billalloc.BillCreditPeriod != null )
+                if (billalloc.BillCreditPeriod != null)
                 {
                     EffectiveDate ??= Date;
-                    DateTime dateTime = ( DateTime ) EffectiveDate!;
+                    DateTime dateTime = (DateTime)EffectiveDate!;
                     double days = dateTime.Subtract(new DateTime(1900, 1, 1)).TotalDays + 1;
                     // billalloc.BillCP.JD = days.ToString();
                 }
@@ -692,7 +691,7 @@ public class Voucher : BasicTallyObject, ITallyObject
         });
     }
 
-    public new void PrepareForExport ()
+    public new void PrepareForExport()
     {
         OrderLedgers(); //Ensures ledgers are ordered in correct way
         GetJulianday();
@@ -700,28 +699,28 @@ public class Voucher : BasicTallyObject, ITallyObject
     }
 
     /// <inheritdoc/>
-    public override void RemoveNullChilds ()
+    public override void RemoveNullChilds()
     {
         EWayBillDetails = EWayBillDetails
             ?.Where(Ewaybilldetail => !Ewaybilldetail.IsNull())
             ?.ToList();
-        if ( EWayBillDetails?.Count == 0 )
+        if (EWayBillDetails?.Count == 0)
         {
             EWayBillDetails = null;
         }
         AttendanceEntries = AttendanceEntries?.Where(attndentry => !attndentry.IsNull())?.ToList();
-        if ( AttendanceEntries != null && AttendanceEntries.Count == 0 )
+        if (AttendanceEntries != null && AttendanceEntries.Count == 0)
         {
             AttendanceEntries = null;
         }
         Ledgers = Ledgers?.Where(ledg => !ledg.IsNull())?.ToList();
-        if ( Ledgers != null && Ledgers.Count == 0 )
+        if (Ledgers != null && Ledgers.Count == 0)
         {
             Ledgers = null;
         }
     }
 
-    public override string ToString ()
+    public override string ToString()
     {
         return $"{VoucherType} - {VoucherNumber}";
     }
@@ -735,7 +734,7 @@ public class EVoucherLedger : VoucherLedger
 [XmlRoot(ElementName = "ALLLEDGERENTRIES.LIST")]
 public class BaseVoucherLedger : TallyBaseObject
 {
-    public BaseVoucherLedger ()
+    public BaseVoucherLedger()
     {
     }
 
@@ -783,7 +782,7 @@ public class BaseVoucherLedger : TallyBaseObject
     {
         get
         {
-            if ( Amount != null )
+            if (Amount != null)
             {
                 return Amount.IsDebit;
             }
@@ -812,13 +811,13 @@ public class BaseVoucherLedger : TallyBaseObject
 [XmlRoot(ElementName = "ALLLEDGERENTRIES.LIST")]
 public class VoucherLedger : BaseVoucherLedger
 {
-    public VoucherLedger ( string name, TallyAmount amount )
+    public VoucherLedger(string name, TallyAmount amount)
     {
         LedgerName = name;
         Amount = amount;
     }
 
-    public VoucherLedger ()
+    public VoucherLedger()
     {
     }
 
@@ -864,14 +863,14 @@ public class VoucherLedger : BaseVoucherLedger
         get; set;
     }
 
-    public bool IsNull ()
+    public bool IsNull()
     {
-        if ( string.IsNullOrEmpty(LedgerName) )
+        if (string.IsNullOrEmpty(LedgerName))
         {
             return true;
         }
         BankAllocations = BankAllocations?.Where(bankalloc => !bankalloc.IsNull())?.ToList();
-        if ( BankAllocations != null && BankAllocations.Count == 0 )
+        if (BankAllocations != null && BankAllocations.Count == 0)
         {
             BankAllocations = null;
         }
@@ -882,7 +881,7 @@ public class VoucherLedger : BaseVoucherLedger
 [XmlRoot(ElementName = "BILLALLOCATIONS.LIST")]
 public class BillAllocations : TallyBaseObject
 {
-    public BillAllocations ()
+    public BillAllocations()
     {
     }
 
@@ -959,7 +958,7 @@ public class InventoryEntries : AllInventoryAllocations
 [XmlRoot(ElementName = "INVENTORYALLOCATIONS.LIST")]
 public class InventoryAllocations : TallyBaseObject
 {
-    public InventoryAllocations ()
+    public InventoryAllocations()
     {
     }
 
@@ -1016,7 +1015,7 @@ public class InventoryAllocations : TallyBaseObject
     {
         get
         {
-            if ( Amount != null )
+            if (Amount != null)
             {
                 return Amount.IsDebit;
             }
@@ -1157,11 +1156,11 @@ public class BatchAllocations : TallyBaseObject //Godown Allocations
 [XmlRoot(ElementName = "CATEGORYALLOCATIONS.LIST")]
 public class CostCategoryAllocations : TallyBaseObject
 {
-    public CostCategoryAllocations ()
+    public CostCategoryAllocations()
     {
     }
 
-    public CostCategoryAllocations ( string name, List<CostCenterAllocations> costCenterAllocations )
+    public CostCategoryAllocations(string name, List<CostCenterAllocations> costCenterAllocations)
     {
         CostCategoryName = name;
         CostCenterAllocations = costCenterAllocations;
@@ -1194,11 +1193,11 @@ public class CostCategoryAllocations : TallyBaseObject
 [XmlRoot(ElementName = "COSTCENTREALLOCATIONS.LIST")]
 public class CostCenterAllocations : TallyBaseObject
 {
-    public CostCenterAllocations ()
+    public CostCenterAllocations()
     {
     }
 
-    public CostCenterAllocations ( string name, TallyAmount amount )
+    public CostCenterAllocations(string name, TallyAmount amount)
     {
         Name = name;
         Amount = amount;
@@ -1278,7 +1277,7 @@ public class AttendanceEntry
         get; set;
     }
 
-    public bool IsNull ()
+    public bool IsNull()
     {
         if (
             string.IsNullOrEmpty(Name)
@@ -1391,10 +1390,10 @@ public class EwayBillDetail : TallyBaseObject, ICheckNull
     }
 
     /// <inheritdoc/>
-    public bool IsNull ()
+    public bool IsNull()
     {
         TransporterDetails = TransporterDetails?.Where(Details => !Details.IsNull())?.ToList();
-        if ( TransporterDetails?.Count == 0 )
+        if (TransporterDetails?.Count == 0)
         {
             TransporterDetails = null;
         }
@@ -1472,16 +1471,16 @@ public class TransporterDetail : TallyBaseObject, ICheckNull
         get; set;
     }
 
-    public bool IsNull ()
+    public bool IsNull()
     {
         if (
             string.IsNullOrEmpty(Distance)
             && string.IsNullOrEmpty(TransporterName)
             && string.IsNullOrEmpty(TransporterId)
-            && ( TransportMode is null || TransportMode is Models.TransportMode.None )
+            && (TransportMode is null || TransportMode is Models.TransportMode.None)
             && string.IsNullOrEmpty(DocumentNumber)
             && string.IsNullOrEmpty(VehicleNumber)
-            && ( VehicleType is null || VehicleType is Models.VehicleType.None )
+            && (VehicleType is null || VehicleType is Models.VehicleType.None)
         )
         {
             return true;
@@ -1578,7 +1577,7 @@ public class PayHeadAllocation
     {
         get
         {
-            if ( Amount != null )
+            if (Amount != null)
             {
                 return Amount.IsDebit;
             }
@@ -1730,9 +1729,9 @@ public class BankAllocation
         get; set;
     }
 
-    internal bool IsNull ()
+    internal bool IsNull()
     {
-        if ( Date == null && BankersDate == null && InstrumentDate == null )
+        if (Date == null && BankersDate == null && InstrumentDate == null)
         {
             return true;
         }
