@@ -133,12 +133,12 @@ public partial class Ledger : BasicTallyObject, IAliasTallyObject
     [Column(TypeName = "nvarchar(20)")]
     public TaxType TaxType { get; set; }
 
-    //[XmlElement(ElementName = "GSTDUTYHEAD")]
-    //[Column(TypeName = "nvarchar(15)")]
-    //public string? GSTTaxType
-    //{
-    //    get; set;
-    //}
+    [XmlElement(ElementName = "GSTDUTYHEAD")]
+    [Column(TypeName = "nvarchar(15)")]
+    public string? GSTTaxType
+    {
+        get; set;
+    }
 
     [XmlElement(ElementName = "RATEOFTAXCALCULATION")]
     public double? RateofTax { get; set; }

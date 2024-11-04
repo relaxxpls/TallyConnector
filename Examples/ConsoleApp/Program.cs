@@ -34,6 +34,17 @@ var tally = new TallyService(http);
 // };
 // await tally.PostLedgerAsync(ledger);
 
+// ? Create IGST Ledger
+// var ledger = new Ledger()
+// {
+//     OldName = "IGST",
+//     Name = "IGST",
+//     Group = "Duties & Taxes",
+//     TaxType = TaxType.GST,
+//     GSTTaxType = "IGST",
+// };
+// await tally.PostLedgerAsync(ledger);
+
 // ? Create StockItem
 // var stockItem = new StockItem()
 // {
@@ -89,7 +100,6 @@ var voucher = new Voucher()
     Date = DateTime.Now,
     ReferenceDate = "2021-04-01",
     Narration = "Bought some items",
-    // PartyLedgerName = "TechGear Solutions",
     Ledgers = [
         new() {
             LedgerName = "TechGear Solutions",
@@ -115,6 +125,7 @@ var voucher = new Voucher()
             BilledQuantity = 2,
             Rate = 6000,
             Amount = -120000,
+            IndexNumber = 0,
             Ledgers = [
                 new() {
                     LedgerName = "IT Equipment",
@@ -128,6 +139,7 @@ var voucher = new Voucher()
             BilledQuantity = 4,
             Rate = 10000,
             Amount = -40000,
+            IndexNumber = 1,
             Ledgers = [
                 new() {
                     LedgerName = "IT Equipment",
