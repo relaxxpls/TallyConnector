@@ -548,7 +548,6 @@ public class Voucher : BasicTallyObject, ITallyObject
     }
 
     [XmlElement(ElementName = "ALLLEDGERENTRIES.LIST", Type = typeof(VoucherLedger))]
-    [XmlElement(ElementName = "LEDGERENTRIES.LIST", Type = typeof(EVoucherLedger))]
     [JsonPropertyName("ledgers")]
     public List<VoucherLedger>? Ledgers
     {
@@ -724,7 +723,7 @@ public class Voucher : BasicTallyObject, ITallyObject
     }
 }
 
-[XmlRoot(ElementName = "LEDGERENTRIES.LIST")]
+[XmlRoot(ElementName = "ALLLEDGERENTRIES.LIST")]
 public class EVoucherLedger : VoucherLedger
 {
 }

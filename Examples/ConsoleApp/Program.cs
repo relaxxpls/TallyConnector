@@ -93,60 +93,90 @@ var tally = new TallyService(http);
 // await tally.PostStockItemAsync(stockItem);
 
 // ? Create Voucher
+// var voucher = new Voucher()
+// {
+//     VoucherType = "Purchase",
+//     Reference = "Ref2as",
+//     Date = DateTime.Now,
+//     ReferenceDate = "2021-04-01",
+//     Narration = "Bought some items",
+//     Ledgers = [
+//         new() {
+//             LedgerName = "TechGear Solutions",
+//             Amount = 188800,
+//         },
+//         new() {
+//             LedgerName = "IGST",
+//             Amount = -28800,
+//         }
+//         // new() {
+//         //     LedgerName = "CGST",
+//         //     Amount = -14400,
+//         // },
+//         // new() {
+//         //     LedgerName = "SGST",
+//         //     Amount = -14400,
+//         // },
+//     ],
+//     InventoryAllocations = [
+//         new() {
+//             StockItemName = "Business Laptop Model X",
+//             ActualQuantity = 2,
+//             BilledQuantity = 2,
+//             Rate = 6000,
+//             Amount = -120000,
+//             IndexNumber = 0,
+//             Ledgers = [
+//                 new() {
+//                     LedgerName = "IT Equipment",
+//                     Amount = -120000,
+//                 },
+//             ],
+//         },
+//         new() {
+//             StockItemName = "24-inch LED Monitor",
+//             ActualQuantity = 4,
+//             BilledQuantity = 4,
+//             Rate = 10000,
+//             Amount = -40000,
+//             IndexNumber = 1,
+//             Ledgers = [
+//                 new() {
+//                     LedgerName = "IT Equipment",
+//                     Amount = -40000,
+//                 },
+//             ],
+//         }
+//     ],
+// };
+
+// ? Create Voucher
 var voucher = new Voucher()
 {
-    VoucherType = "Purchase",
-    Reference = "Ref2as",
+    VoucherType = "Journal",
     Date = DateTime.Now,
-    ReferenceDate = "2021-04-01",
-    Narration = "Bought some items",
+    Narration = "Accounting Invoice for April 2024 along courier charges for the documents",
     Ledgers = [
         new() {
-            LedgerName = "TechGear Solutions",
-            Amount = 188800,
+            LedgerName = "Accounting and Auditing Expenses",
+            Amount = -10000,
         },
         new() {
-            LedgerName = "IGST",
-            Amount = -28800,
-        }
-        // new() {
-        //     LedgerName = "CGST",
-        //     Amount = -14400,
-        // },
-        // new() {
-        //     LedgerName = "SGST",
-        //     Amount = -14400,
-        // },
-    ],
-    InventoryAllocations = [
-        new() {
-            StockItemName = "Business Laptop Model X",
-            ActualQuantity = 2,
-            BilledQuantity = 2,
-            Rate = 6000,
-            Amount = -120000,
-            IndexNumber = 0,
-            Ledgers = [
-                new() {
-                    LedgerName = "IT Equipment",
-                    Amount = -120000,
-                },
-            ],
+            LedgerName = "Input CGST Account",
+            Amount = -900,
         },
         new() {
-            StockItemName = "24-inch LED Monitor",
-            ActualQuantity = 4,
-            BilledQuantity = 4,
-            Rate = 10000,
-            Amount = -40000,
-            IndexNumber = 1,
-            Ledgers = [
-                new() {
-                    LedgerName = "IT Equipment",
-                    Amount = -40000,
-                },
-            ],
-        }
+            LedgerName = "Input SGST Account",
+            Amount = -900,
+        },
+        new() {
+            LedgerName = "Courier Charges",
+            Amount = -800,
+        },
+        new() {
+            LedgerName = "SG & Associates",
+            Amount = 12600,
+        },
     ],
 };
 
