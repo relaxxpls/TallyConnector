@@ -169,7 +169,7 @@ public partial class TallyService : ITallyService
                         xmlattribute
                     );
                 }
-                xmlattribute.XmlElements.Add(new("ALLLEDGERENTRIES.LIST"));
+                xmlattribute.XmlElements.Add(new("LEDGERENTRIES.LIST"));
             }
         }
         Object.PrepareForExport();
