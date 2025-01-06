@@ -51,7 +51,8 @@ var tally = new TallyService(http);
 //     OldName = "TallAi - Stock Item",
 //     Name = "TallAi - Stock Item",
 //     BaseUnit = "Nos",
-//     GSTApplicable = "Applicable",
+//     GSTApplicable = "\u0004 Applicable",
+//     GSTTypeOfSupply = "Goods",
 //     HSNDetails = [
 //         new() {
 //             HSNCode = "123456",
@@ -93,91 +94,82 @@ var tally = new TallyService(http);
 // await tally.PostStockItemAsync(stockItem);
 
 // ? Create Voucher
-// var voucher = new Voucher()
-// {
-//     VoucherType = "Purchase",
-//     Reference = "Ref2as",
-//     Date = DateTime.Now,
-//     ReferenceDate = "2021-04-01",
-//     Narration = "Bought some items",
-//     Ledgers = [
-//         new() {
-//             LedgerName = "TechGear Solutions",
-//             Amount = 188800,
-//         },
-//         new() {
-//             LedgerName = "IGST",
-//             Amount = -28800,
-//         }
-//         // new() {
-//         //     LedgerName = "CGST",
-//         //     Amount = -14400,
-//         // },
-//         // new() {
-//         //     LedgerName = "SGST",
-//         //     Amount = -14400,
-//         // },
-//     ],
-//     InventoryAllocations = [
-//         new() {
-//             StockItemName = "Business Laptop Model X",
-//             ActualQuantity = 2,
-//             BilledQuantity = 2,
-//             Rate = 6000,
-//             Amount = -120000,
-//             IndexNumber = 0,
-//             Ledgers = [
-//                 new() {
-//                     LedgerName = "IT Equipment",
-//                     Amount = -120000,
-//                 },
-//             ],
-//         },
-//         new() {
-//             StockItemName = "24-inch LED Monitor",
-//             ActualQuantity = 4,
-//             BilledQuantity = 4,
-//             Rate = 10000,
-//             Amount = -40000,
-//             IndexNumber = 1,
-//             Ledgers = [
-//                 new() {
-//                     LedgerName = "IT Equipment",
-//                     Amount = -40000,
-//                 },
-//             ],
-//         }
-//     ],
-// };
-
-// ? Create Voucher
 var voucher = new Voucher()
 {
-    VoucherType = "Journal",
+    VoucherType = "Purchase",
+    Reference = "LGF/24/01370",
     Date = DateTime.Now,
-    Narration = "Accounting Invoice for April 2024 along courier charges for the documents",
+    ReferenceDate = "26-04-2024",
+    Narration = "Purchase of furniture items from LOOKING GOOD FURNITURE LLP",
+    PlaceOfSupply = "Karnataka",
+    RegistrationType = "Regular",
+    Country = "India",
+    State = "Karnataka",
     Ledgers = [
-        new() {
-            LedgerName = "Accounting and Auditing Expenses",
-            Amount = -10000,
+        new EVoucherLedger() {
+            LedgerName = "LOOKING GOOD FURNITURE LLP",
+            Amount = 10790.01m,
         },
-        new() {
-            LedgerName = "Input CGST Account",
-            Amount = -900,
+        // new() {
+        //     LedgerName = "IGST",
+        //     Amount = -28800,
+        // },
+        new EVoucherLedger() {
+            LedgerName = "CGST",
+            Amount = -822.97m,
         },
-        new() {
-            LedgerName = "Input SGST Account",
-            Amount = -900,
+        new EVoucherLedger() {
+            LedgerName = "SGST",
+            Amount = -822.97m,
         },
+    ],
+    InventoryAllocations = [
         new() {
-            LedgerName = "Courier Charges",
-            Amount = -800,
-        },
-        new() {
-            LedgerName = "SG & Associates",
-            Amount = 12600,
+            StockItemName = "Center Table A107",
+            ActualQuantity = 1,
+            BilledQuantity = 1,
+            Rate = 9144.07m,
+            Amount = -9144.07m,
+            IndexNumber = 0,
+            Ledgers = [
+                new() {
+                    LedgerName = "TallAi - Purchase Account",
+                    Amount = -9144.07m,
+                },
+            ],
         },
     ],
 };
+
+// ? Create Voucher
+// var voucher = new Voucher()
+// {
+//     VoucherType = "Journal",
+//     Date = DateTime.Now,
+//     Narration = "Accounting Invoice for April 2024 along courier charges for the documents",
+//     View = VoucherViewType.AccountingVoucherView,
+//     Ledgers = [
+//         new() {
+//             LedgerName = "Accounting and Auditing Expenses",
+//             Amount = -10000,
+//         },
+//         new() {
+//             LedgerName = "Input CGST Account",
+//             Amount = -900,
+//         },
+//         new() {
+//             LedgerName = "Input SGST Account",
+//             Amount = -900,
+//         },
+//         new() {
+//             LedgerName = "Courier Charges",
+//             Amount = -800,
+//         },
+//         new() {
+//             LedgerName = "SG & Associates",
+//             Amount = 12600,
+//         },
+//     ],
+// };
 
 await tally.PostVoucherAsync(voucher);

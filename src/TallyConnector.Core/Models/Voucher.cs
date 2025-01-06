@@ -548,7 +548,7 @@ public class Voucher : BasicTallyObject, ITallyObject
     }
 
     [XmlElement(ElementName = "ALLLEDGERENTRIES.LIST", Type = typeof(VoucherLedger))]
-    // [XmlElement(ElementName = "LEDGERENTRIES.LIST", Type = typeof(EVoucherLedger))]
+    [XmlElement(ElementName = "LEDGERENTRIES.LIST", Type = typeof(EVoucherLedger))]
     [JsonPropertyName("ledgers")]
     public List<VoucherLedger>? Ledgers
     {
@@ -806,6 +806,7 @@ public class BaseVoucherLedger : TallyBaseObject
     }
 }
 
+[XmlInclude(typeof(EVoucherLedger))]
 [XmlRoot(ElementName = "ALLLEDGERENTRIES.LIST")]
 public class VoucherLedger : BaseVoucherLedger
 {
